@@ -1,0 +1,493 @@
+\section{图论}
+
+\subsection{基本概念和性质}
+
+\subsubsection{图的定义}
+
+\begin{enumerate}
+	\item \textbf{无向图}：图 \(G=\langle V,E\rangle\) 由非空顶点集 \(V\) 和边集 \(E\) 组成。无向边记作 \(\{u,v\}\)。
+	\item \textbf{有向图}：边有方向，记作 \(\langle u,v\rangle\)，表示从 \(u\) 指向 \(v\) 的弧。
+	\item \textbf{简单图}：无环、无平行边的无向图。
+	\item \textbf{多重图}：允许平行边的图。
+	\item \textbf{平凡图}：只有一个顶点且没有边的图。
+	\item \textbf{完全图}：任意两个不同顶点之间都有边的简单无向图，\(n\) 个顶点的完全图记作 \(K_n\)。
+	\item \textbf{补图}：简单图 \(G\) 的补图 \(\overline{G}\) 与 \(G\) 有相同顶点集，且两点在 \(\overline{G}\) 中相邻当且仅当它们在 \(G\) 中不相邻。
+\end{enumerate}
+
+\subsubsection{度数与握手定理}
+
+\begin{enumerate}
+	\item 无向图中，顶点 \(v\) 的度数记作 \(\deg(v)\)。环对度数贡献 \(2\)。
+	\item \textbf{握手定理}：
+	\[
+	\sum_{v\in V}\deg(v)=2|E|.
+	\]
+	因此无向图中奇度顶点个数必为偶数。
+	\item 有向图中，顶点 \(v\) 的入度记作 \(\deg^-(v)\)，出度记作 \(\deg^+(v)\)，并且
+	\[
+	\sum_{v\in V}\deg^-(v)=\sum_{v\in V}\deg^+(v)=|E|.
+	\]
+\end{enumerate}
+
+\begin{question}{例题1}
+	某无向图的顶点度数为 \(3,3,2,2,1,1\)，求边数。
+	
+	\begin{solution}
+	度数和为
+	\[
+	3+3+2+2+1+1=12.
+	\]
+	由握手定理，边数为
+	\[
+	|E|=\frac{12}{2}=6.
+	\]
+	\end{solution}
+\end{question}
+
+\subsubsection{路径、回路与连通性}
+
+\begin{enumerate}
+	\item \textbf{路径}：顶点和边交替出现的序列
+	\[
+	v_0,e_1,v_1,e_2,\dots,e_k,v_k.
+	\]
+	路径长度为边数 \(k\)。
+	\item \textbf{简单路径}：边不重复的路径。
+	\item \textbf{基本路径}：顶点不重复的路径。
+	\item \textbf{回路}：起点和终点相同的路径。
+	\item \textbf{连通}：无向图中，若 \(u\) 与 \(v\) 间存在路径，则称二者连通。
+	\item \textbf{连通图}：任意两个顶点都连通的无向图。
+	\item \textbf{连通分支}：极大的连通子图。连通分支数常记作 \(\omega(G)\)。
+\end{enumerate}
+
+\subsubsection{子图、生成子图与连通度}
+
+\begin{enumerate}
+	\item 若 \(V(H)\subseteq V(G)\)，\(E(H)\subseteq E(G)\)，则称 \(H\) 是 \(G\) 的子图。
+	\item 若 \(H\) 是 \(G\) 的子图且 \(V(H)=V(G)\)，则称 \(H\) 是 \(G\) 的生成子图。
+	\item \textbf{割点}：连通图中，删去某顶点及其关联边后图不再连通，则该顶点为割点。
+	\item \textbf{割边}：删去某边后图不再连通，则该边为割边，也称桥。
+	\item 点连通度：
+	\[
+	\kappa(G)=\min\{|S|\mid S\subseteq V,\ G-S\text{ 不连通或为平凡图}\}.
+	\]
+	\item 边连通度：
+	\[
+	\lambda(G)=\min\{|F|\mid F\subseteq E,\ G-F\text{ 不连通}\}.
+	\]
+	\item 常见不等式：
+	\[
+	\kappa(G)\le\lambda(G)\le\delta(G),
+	\]
+	其中 \(\delta(G)\) 为最小度。
+\end{enumerate}
+
+\subsubsection{有向图的连通性}
+
+\begin{enumerate}
+	\item 把有向图所有弧改为无向边得到的图称为基图。若基图连通，则原有向图弱连通。
+	\item 若任意两点 \(u,v\) 中至少有一个方向可达，则称为单向连通。
+	\item 若任意两点 \(u,v\) 都有 \(u\) 可达 \(v\) 且 \(v\) 可达 \(u\)，则称为强连通。
+	\item 极大的强连通子图称为强分图。
+\end{enumerate}
+
+\subsubsection{图的矩阵表示}
+
+\begin{enumerate}
+	\item \textbf{邻接矩阵}：设 \(V=\{v_1,\dots,v_n\}\)，简单图的邻接矩阵 \(A=(a_{ij})\) 满足
+	\[
+	a_{ij}=
+	\begin{cases}
+	1,&v_i\text{ 与 }v_j\text{ 相邻},\\
+	0,&\text{否则}.
+	\end{cases}
+	\]
+	无向图的邻接矩阵是对称矩阵。
+	\item \textbf{路径计数}：若 \(A\) 是图 \(G\) 的邻接矩阵，则 \(A^k\) 的第 \(i,j\) 个元素等于从 \(v_i\) 到 \(v_j\) 长度为 \(k\) 的通路条数。
+	\item \textbf{可达矩阵}：若 \(v_i\) 可达 \(v_j\)，对应元素为 \(1\)，否则为 \(0\)。
+	\item \textbf{关联矩阵}：行对应顶点，列对应边。无向图中，顶点与边关联则填 \(1\)，否则填 \(0\)。每列通常有两个 \(1\)，每行元素和为对应顶点度数。
+	\item \textbf{有向图完全关联矩阵}：若 \(v_i\) 是弧 \(e_j\) 的起点填 \(1\)，是终点填 \(-1\)，不关联填 \(0\)。连通图有 \(n\) 个顶点时，其完全关联矩阵秩为 \(n-1\)。
+\end{enumerate}
+
+\subsection{特殊的图}
+
+\subsubsection{欧拉图}
+
+\begin{enumerate}
+	\item \textbf{欧拉路}：经过图中每条边一次且仅一次的路径。
+	\item \textbf{欧拉回路}：经过图中每条边一次且仅一次的回路。
+	\item \textbf{欧拉图}：具有欧拉回路的图。
+	\item 无向连通图存在欧拉回路当且仅当所有顶点度数均为偶数。
+	\item 无向连通图存在欧拉路当且仅当奇度顶点个数为 \(0\) 或 \(2\)。若恰有 \(2\) 个奇度顶点，则欧拉路从一个奇度顶点出发，到另一个奇度顶点结束。
+	\item 有向图存在欧拉回路当且仅当其基图连通，且每个顶点入度等于出度。
+	\item 有向图存在欧拉路但无欧拉回路时，除两个顶点外其余顶点入度等于出度；一个顶点出度比入度大 \(1\)，另一个顶点入度比出度大 \(1\)。
+\end{enumerate}
+
+\begin{question}{例题2}
+	判断完全图 \(K_n\) 何时存在欧拉回路。
+	
+	\begin{solution}
+	在 \(K_n\) 中，每个顶点度数为 \(n-1\)。欧拉回路要求所有顶点度数为偶数，所以 \(n-1\) 为偶数，即 \(n\) 为奇数。因此 \(K_n\) 在 \(n\) 为奇数时存在欧拉回路。
+	\end{solution}
+\end{question}
+
+\subsubsection{汉密尔顿图}
+
+\begin{enumerate}
+	\item \textbf{汉密尔顿路}：经过图中每个顶点恰好一次的路径。
+	\item \textbf{汉密尔顿回路}：经过图中每个顶点恰好一次并回到起点的回路。
+	\item \textbf{汉密尔顿图}：具有汉密尔顿回路的图。
+	\item 必要条件：若 \(G\) 有汉密尔顿回路，则对任意非空真子集 \(S\subseteq V(G)\)，有
+	\[
+	\omega(G-S)\le |S|.
+	\]
+	\item Dirac 定理：若简单图 \(G\) 有 \(n\ge3\) 个顶点，且任意顶点度数都至少为 \(n/2\)，则 \(G\) 是汉密尔顿图。
+	\item Ore 定理：若简单图 \(G\) 有 \(n\ge3\) 个顶点，且任意不相邻顶点 \(u,v\) 都满足
+	\[
+	\deg(u)+\deg(v)\ge n,
+	\]
+	则 \(G\) 是汉密尔顿图。
+	\item 若任意不相邻顶点度数和至少为 \(n-1\)，则存在汉密尔顿路。
+\end{enumerate}
+
+\subsubsection{平面图}
+
+\begin{enumerate}
+	\item \textbf{平面图}：能画在平面上且边只在端点相交的图。
+	\item \textbf{面}：平面嵌入把平面分成的连通区域，包括无界外部面。
+	\item 面的次数和等于边数的两倍：
+	\[
+	\sum_{f\in F}\deg(f)=2e.
+	\]
+	\item \textbf{欧拉公式}：若连通平面图有 \(v\) 个顶点、\(e\) 条边、\(r\) 个面，则
+	\[
+	v-e+r=2.
+	\]
+	\item 若 \(G\) 是 \(v\ge3\) 的连通简单平面图，则
+	\[
+	e\le3v-6.
+	\]
+	若 \(G\) 中无三角形，则
+	\[
+	e\le2v-4.
+	\]
+	\item Kuratowski 定理：一个图是平面图，当且仅当它不含与 \(K_5\) 或 \(K_{3,3}\) 同胚的子图。
+\end{enumerate}
+
+\begin{question}{例题3}
+	证明 \(K_5\) 不是平面图。
+	
+	\begin{solution}
+	\(K_5\) 有 \(v=5\) 个顶点，\(e=\binom52=10\) 条边。若它是简单平面图，则应满足
+	\[
+	e\le3v-6=15-6=9.
+	\]
+	但 \(10>9\)，矛盾。因此 \(K_5\) 不是平面图。
+	\end{solution}
+\end{question}
+
+\subsubsection{对偶图与着色}
+
+网页图片中的对偶图说明可整理为：
+\begin{enumerate}
+	\item 对连通平面图的每个面放置一个新顶点。
+	\item 若原图一条边分隔两个面，则在对应新顶点之间连一条边。
+	\item 若原图一条边两侧是同一面，则对偶图中出现环。
+	\item 若图 \(G\) 与其对偶图 \(G^*\) 同构，则 \(G\) 称为自对偶图。
+\end{enumerate}
+
+着色相关结论：
+\begin{enumerate}
+	\item 完全图 \(K_n\) 的点色数为
+	\[
+	\chi(K_n)=n.
+	\]
+	\item 任意至少三个顶点的连通平面图中存在度数不超过 \(5\) 的顶点。
+	\item 任意平面图都是 \(5\)-可着色的。
+	\item 若连通平面图 \(G\) 自对偶，则由 \(v(G)=r(G)\) 和欧拉公式可得
+	\[
+	e=2v-2.
+	\]
+\end{enumerate}
+
+\subsection{树与生成树}
+
+\subsubsection{树的定义}
+
+\begin{enumerate}
+	\item \textbf{树}：连通且无回路的无向图。
+	\item \textbf{树叶}：度数为 \(1\) 的顶点。
+	\item \textbf{分枝点或内点}：度数大于 \(1\) 的顶点。
+	\item \textbf{森林}：无回路的无向图，每个连通分支都是树。
+\end{enumerate}
+
+\subsubsection{树的等价刻画}
+
+对图 \(T\)，以下命题等价：
+\begin{enumerate}
+	\item \(T\) 是树。
+	\item \(T\) 连通且无回路。
+	\item \(T\) 无回路且 \(e=v-1\)。
+	\item \(T\) 连通且 \(e=v-1\)。
+	\item \(T\) 中任意两顶点之间有唯一一条路径。
+	\item \(T\) 无回路，任意增加一条新边都会产生唯一回路。
+	\item \(T\) 连通，任意删除一条边都会使图不连通。
+\end{enumerate}
+
+常用性质：
+\begin{enumerate}
+	\item 任一棵非平凡树至少有两片树叶。
+	\item \(v\) 个顶点的树有 \(v-1\) 条边。
+	\item \(k\) 个连通分支的森林若有 \(v\) 个顶点，则有 \(v-k\) 条边。
+\end{enumerate}
+
+\subsubsection{生成树与最小生成树}
+
+\begin{enumerate}
+	\item 若连通图 \(G\) 的生成子图 \(T\) 是树，则 \(T\) 是 \(G\) 的生成树。
+	\item 生成树中的边称为树枝；不在生成树中的边称为弦；所有弦的集合称为生成树的补。
+	\item 连通图至少有一棵生成树。
+	\item 在带权连通图的所有生成树中，边权之和最小的生成树称为最小生成树。
+	\item Kruskal 算法：按边权从小到大选边，若加入该边不形成回路则保留，直到得到 \(v-1\) 条边。
+	\item Prim 算法：从任一顶点开始，每次选取连接已选顶点集与未选顶点集的最小权边。
+\end{enumerate}
+
+\subsection{根树}
+
+\subsubsection{根树基本概念}
+
+\begin{enumerate}
+	\item 若有向图忽略方向后是一棵树，则称为有向树。
+	\item 若有向树中恰有一个顶点入度为 \(0\)，其余顶点入度均为 \(1\)，则称为根树。入度为 \(0\) 的顶点称为根。
+	\item 根树中出度为 \(0\) 的顶点称为叶；出度不为 \(0\) 的顶点称为分枝点或内点。
+	\item 若每个顶点的出度不超过 \(m\)，称为 \(m\) 叉树。
+	\item 若每个顶点的出度恰为 \(0\) 或 \(m\)，称为完全 \(m\) 叉树。
+	\item 若完全 \(m\) 叉树所有叶位于同一层，则称为正则 \(m\) 叉树。
+\end{enumerate}
+
+\subsubsection{通路长度与最优树}
+
+\begin{enumerate}
+	\item 根到某结点路径长度称为该结点的通路长度。
+	\item 内点通路长度之和称为内部通路长度；叶通路长度之和称为外部通路长度。
+	\item 完全 \(m\) 叉树若叶数为 \(t\)，分枝点数为 \(i\)，则
+	\[
+	(m-1)i=t-1.
+	\]
+	\item 完全二叉树若分枝点数为 \(n\)，内部通路长度之和为 \(I\)，外部通路长度之和为 \(E\)，则
+	\[
+	E=I+2n.
+	\]
+	\item 带权二叉树中，若叶 \(w_i\) 的权为 \(w_i\)，通路长度为 \(L(w_i)\)，则树权为
+	\[
+	W(T)=\sum_{i=1}^{t}w_iL(w_i).
+	\]
+	使 \(W(T)\) 最小的带权二叉树称为最优树。
+	\item 最优树中，权最小的两个叶是兄弟，且它们所在层次最深。
+	\item Huffman 算法：每次合并权值最小的两棵树，直到只剩一棵树，所得即为最优二叉树。
+\end{enumerate}
+
+\begin{question}{例题4}
+	权值为 \(2,3,7,9\) 的叶构造 Huffman 树，求最小带权路径长度。
+	
+	\begin{solution}
+	先合并 \(2,3\) 得到 \(5\)；再合并 \(5,7\) 得到 \(12\)；最后合并 \(9,12\) 得到 \(21\)。Huffman 树的最小带权路径长度等于每次合并权值之和：
+	\[
+	W=5+12+21=38.
+	\]
+	\end{solution}
+\end{question}
+
+\subsection{图论考试补充}
+
+\subsubsection{图同构}
+
+两个图 \(G_1=\langle V_1,E_1\rangle\)、\(G_2=\langle V_2,E_2\rangle\) 同构，是指存在双射
+\[
+f:V_1\to V_2
+\]
+使得任意 \(u,v\in V_1\) 有
+\[
+\{u,v\}\in E_1\Leftrightarrow \{f(u),f(v)\}\in E_2.
+\]
+
+判定图同构常先比较不变量：
+\begin{enumerate}
+	\item 顶点数、边数是否相同。
+	\item 度数序列是否相同。
+	\item 连通分支数是否相同。
+	\item 是否有回路、三角形、割点、割边等。
+\end{enumerate}
+这些条件相同只是必要条件，不一定充分。
+
+\subsubsection{二部图}
+
+若顶点集可划分为两个互不相交的子集 \(X,Y\)，使每条边都连接 \(X\) 中一点和 \(Y\) 中一点，则称图为二部图。
+
+常用判定：
+\[
+G\text{ 是二部图}\Leftrightarrow G\text{ 中不含奇长度回路}.
+\]
+
+完全二部图 \(K_{m,n}\) 的边数为
+\[
+mn.
+\]
+当 \(m,n\ge2\) 时，\(K_{m,n}\) 中每个面至少由 \(4\) 条边围成；这常用于证明 \(K_{3,3}\) 非平面。
+
+\begin{question}{例题5}
+	证明 \(K_{3,3}\) 不是平面图。
+	
+	\begin{solution}
+	\(K_{3,3}\) 有 \(v=6\) 个顶点，\(e=9\) 条边，且不含三角形。若它是简单平面图，则应满足
+	\[
+	e\le2v-4=12-4=8.
+	\]
+	但 \(9>8\)，矛盾。因此 \(K_{3,3}\) 不是平面图。
+	\end{solution}
+\end{question}
+
+\subsubsection{最短路与 Dijkstra 算法}
+
+带权图中，路径长度为路径上边权之和。若所有边权非负，可用 Dijkstra 算法求单源最短路。
+
+\begin{enumerate}
+	\item 初始令源点距离为 \(0\)，其余顶点距离为 \(\infty\)。
+	\item 每次选取未确定顶点中距离最小的顶点 \(u\)，将其标记为确定。
+	\item 用 \(u\) 的所有邻边进行松弛：
+	\[
+	d(v)\leftarrow \min\{d(v),d(u)+w(u,v)\}.
+	\]
+	\item 重复直到所有顶点确定或目标顶点确定。
+\end{enumerate}
+
+\subsubsection{最小生成树易错点}
+
+\begin{enumerate}
+	\item 最小生成树只对连通无向带权图讨论。
+	\item 生成树必须包含所有顶点，且边数为 \(v-1\)。
+	\item Kruskal 算法选边时不能形成回路。
+	\item Prim 算法每次只选连接“已选点集”和“未选点集”的最小边。
+	\item 若边权互不相同，则最小生成树唯一；若有相同边权，最小生成树可能不唯一。
+\end{enumerate}
+
+\subsubsection{图论常见数量公式}
+
+\begin{center}
+	\begin{tabular}{cc}
+		\toprule
+		图 & 边数或性质\\
+		\midrule
+		完全图 \(K_n\) & \(\binom n2=\frac{n(n-1)}2\)\\
+		完全二部图 \(K_{m,n}\) & \(mn\)\\
+		树 & \(e=v-1\)\\
+		\(k\) 个分支的森林 & \(e=v-k\)\\
+		连通平面图 & \(v-e+r=2\)\\
+		简单连通平面图 & \(e\le3v-6\)\\
+		无三角形简单连通平面图 & \(e\le2v-4\)\\
+		\bottomrule
+	\end{tabular}
+\end{center}
+
+\subsection{本章重点定义与定理速查}
+
+\subsubsection{图的基本定义}
+
+\begin{enumerate}
+	\item \textbf{无向图}：\(G=\langle V,E\rangle\)，其中 \(V\) 是非空顶点集，\(E\) 是无向边集。
+	\item \textbf{有向图}：边带方向，弧 \(\langle u,v\rangle\) 表示从 \(u\) 指向 \(v\)。
+	\item \textbf{简单图}：无环、无平行边的无向图。
+	\item \textbf{完全图}：任意两个不同顶点均相邻的简单图，记作 \(K_n\)，边数为
+	\[
+	\binom n2=\frac{n(n-1)}2.
+	\]
+	\item \textbf{补图}：简单图 \(\overline G\) 与 \(G\) 顶点集相同，边集互补。
+	\item \textbf{度数}：顶点关联边的条数，环贡献 \(2\)。
+	\item \textbf{握手定理}：
+	\[
+	\sum_{v\in V}\deg(v)=2|E|.
+	\]
+	所以奇度顶点个数为偶数。
+	\item \textbf{有向图度数定理}：
+	\[
+	\sum_{v\in V}\deg^+(v)=\sum_{v\in V}\deg^-(v)=|E|.
+	\]
+\end{enumerate}
+
+\subsubsection{连通性与矩阵}
+
+\begin{enumerate}
+	\item \textbf{路径}：顶点与边交替出现的序列，长度为边数。
+	\item \textbf{回路}：起点和终点相同的路径。
+	\item \textbf{连通图}：任意两个顶点之间都有路径。
+	\item \textbf{连通分支}：极大的连通子图。
+	\item \textbf{割点与割边}：删除后使连通分支数增加的顶点或边。割边也称桥。
+	\item \textbf{邻接矩阵路径定理}：若 \(A\) 是图的邻接矩阵，则 \(A^k\) 的第 \(i,j\) 个元素等于从 \(v_i\) 到 \(v_j\) 长度为 \(k\) 的通路条数。
+	\item \textbf{有向图连通层次}：强连通要求两两互相可达；单向连通要求两点间至少一个方向可达；弱连通只要求基图连通。
+\end{enumerate}
+
+\subsubsection{欧拉图与汉密尔顿图}
+
+\begin{enumerate}
+	\item \textbf{欧拉路}：经过每条边一次且仅一次的路径。
+	\item \textbf{欧拉回路}：经过每条边一次且仅一次并回到起点的回路。
+	\item \textbf{无向欧拉回路判定}：无向连通图有欧拉回路，当且仅当所有顶点度数为偶数。
+	\item \textbf{无向欧拉路判定}：无向连通图有欧拉路，当且仅当奇度顶点数为 \(0\) 或 \(2\)。
+	\item \textbf{有向欧拉回路判定}：基图连通，且每个顶点入度等于出度。
+	\item \textbf{汉密尔顿路}：经过每个顶点一次且仅一次的路径。
+	\item \textbf{汉密尔顿回路}：经过每个顶点一次且仅一次并回到起点的回路。
+	\item \textbf{Dirac 定理}：若简单图有 \(n\ge3\) 个顶点，且每个顶点度数至少为 \(n/2\)，则它是汉密尔顿图。
+	\item \textbf{Ore 定理}：若简单图有 \(n\ge3\) 个顶点，且任意不相邻顶点 \(u,v\) 满足
+	\[
+	\deg(u)+\deg(v)\ge n,
+	\]
+	则它是汉密尔顿图。
+\end{enumerate}
+
+\subsubsection{平面图、树与二部图}
+
+\begin{enumerate}
+	\item \textbf{欧拉公式}：连通平面图满足
+	\[
+	v-e+r=2.
+	\]
+	\item \textbf{简单平面图边数界}：若 \(v\ge3\)，则
+	\[
+	e\le3v-6.
+	\]
+	若无三角形，则
+	\[
+	e\le2v-4.
+	\]
+	\item \textbf{非平面图基本例子}：\(K_5\) 与 \(K_{3,3}\) 都不是平面图。
+	\item \textbf{二部图判定}：
+	\[
+	G\text{ 是二部图}\Leftrightarrow G\text{ 不含奇回路}.
+	\]
+	\item \textbf{树}：连通且无回路的无向图。
+	\item \textbf{树的等价刻画}：树等价于连通且 \(e=v-1\)，也等价于无回路且 \(e=v-1\)，还等价于任意两顶点之间有唯一路径。
+	\item \textbf{森林边数}：有 \(v\) 个顶点、\(k\) 个连通分支的森林有
+	\[
+	e=v-k
+	\]
+	条边。
+	\item \textbf{生成树}：连通图的包含全部顶点的树形生成子图。任意连通图都有生成树。
+	\item \textbf{最小生成树}：带权连通无向图中权和最小的生成树。Kruskal 按边权从小到大选不成环的边；Prim 每次选跨越已选点集和未选点集的最小边。
+\end{enumerate}
+
+\subsubsection{根树与 Huffman 树}
+
+\begin{enumerate}
+	\item \textbf{根树}：恰有一个入度为 \(0\) 的顶点，其余顶点入度均为 \(1\) 的有向树。
+	\item \textbf{\(m\) 叉树}：每个顶点出度不超过 \(m\) 的根树。
+	\item \textbf{完全 \(m\) 叉树}：每个顶点出度为 \(0\) 或 \(m\) 的 \(m\) 叉树。
+	\item \textbf{完全 \(m\) 叉树公式}：若叶数为 \(t\)，分枝点数为 \(i\)，则
+	\[
+	(m-1)i=t-1.
+	\]
+	\item \textbf{完全二叉树通路长度公式}：若分枝点数为 \(n\)，内部通路长度为 \(I\)，外部通路长度为 \(E\)，则
+	\[
+	E=I+2n.
+	\]
+	\item \textbf{Huffman 算法}：每次合并权值最小的两棵树。最优二叉树的带权路径长度等于每次合并所得新权值之和。
+\end{enumerate}

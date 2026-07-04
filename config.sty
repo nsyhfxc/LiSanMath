@@ -1,35 +1,71 @@
+\usepackage[paper=a4paper, margin=2.5cm]{geometry} % 调整页边距
+\usepackage{amsmath}
+\usepackage{array}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{pdfpages}
+\usepackage{float}
+\usepackage{ulem}
+\usepackage{titlepic}
+\usepackage{listings}
+\usepackage{xcolor}      %代码着色宏包
+\usepackage{CJK}         %显示中文宏包
+\usepackage{booktabs}    %用于更美观的表格线
+\usepackage{tabularx}    %自动调整列宽
+\usepackage{exam-zh-choices}
+\RequirePackage{tikz}
+\renewcommand{\baselinestretch}{1.625}
+\lstset{
+    basicstyle=\ttfamily\footnotesize, % 缩小字号
+    columns=fullflexible,              % 紧凑字符间距
+    keywordstyle=\color{blue},         % 关键词高亮
+    commentstyle=\color{gray},         % 注释颜色
+    numbers=left,                      % 显示行号
+    numberstyle=\tiny\color{gray},     % 行号字号
+    frame=single,                      % 边框
+    framesep=2pt,                      % 边框间距
+    xleftmargin=10pt,                  % 左边距
+    breaklines=true,                   % 自动换行
+    showstringspaces=false,            % Do not mark spaces inside strings.
+    language=C++,                      % c++
+    postbreak=\mbox{\textcolor{red}{$\hookrightarrow$}\space}, % 换行标记
+}
+\titlepic{\includegraphics[width=0.5\linewidth]{figures/logo.png}}
 
-% =======================================================
-%               1. 基础信息配置
-% =======================================================
-\orgname{河北工程大学}           % 组织名 (显示在左上角/水印)
-\course{离散数学}  % 课程名 (大标题)
-\term{期末复习参考}     % 学期/属性
-\editor{计算机科学与技术系}        % 整理人
+% Keep the table of contents visually unchanged while making entries clickable.
+\usepackage[unicode,hidelinks,linktoc=all]{hyperref}
 
-% =======================================================
-%               2. 外观与主题设置
-% =======================================================
-% [Logo] 请上传图片后取消注释，否则不显示图片
-% \setlogo{logo.png} 
+\makeatletter
+\let\oldtitle\title
+\let\oldauthor\author
+\let\olddate\date 
+\renewcommand{\title}[1]{\oldtitle{{\heiti\zihao{1}\bfseries #1}}}
+\renewcommand{\author}[1]{\oldauthor{{\heiti\zihao{4}\bfseries #1}}}
+\renewcommand{\date}[1]{\olddate{{\heiti\zihao{4}\bfseries #1}}}
+\renewcommand{\@maketitle}{%
+    \newpage
+    \null
+    \vskip 2em%
+    \begin{center}%
+        \let \footnote \thanks
+        {\centering\@titlepic\par}%
+        \vskip .5em%
+        {\LARGE \@title \par}%
+        \vskip 1.5em%
+        {\large
+        \lineskip .5em%
+        \begin{tabular}[t]{c}%
+            \@author
+        \end{tabular}\par}%
+        \vskip 1em%
+        {\large \@date}%
+    \end{center}%
+    \par
+    \vskip 1.5em}
+\makeatother
 
-% [主题色] 6选1，请根据 Logo 颜色或学科属性选择
-% ---------------------------------------------------
-\settheme{blue}    % [经典蓝] 理工科通用，沉稳专业
-% \settheme{red}     % [典雅红] 适合党团活动/红色校徽
-% \settheme{green}   % [墨玉绿] 适合生化环材/低调风格
-%\settheme{purple}  % [罗兰紫] 适合艺术人文/高级感
-%\settheme{black}   % [极简黑] 适合纯黑白打印，省墨
-% \settheme{orange}  % [活力橙] 适合配合黄色/橙色 Logo
-% ---------------------------------------------------
-
-% =======================================================
-%               3. 功能开关控制台
-% =======================================================
-% [A] 防盗水印开关
-% true = 显示全页水印 | false = 隐藏水印 (内部自用时)
-\showwatermarktrue
-
-% [B] 免责声明开关
-% true = 显示黄色声明框 | false = 隐藏
-\showdisclaimertrue
+% 数学与符号
+\usepackage{amssymb, mathtools} % 数学公式与符号支持
+\everymath{\displaystyle}
+\usepackage{multicol}
+\usepackage{enumitem}

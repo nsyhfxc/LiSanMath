@@ -1,86 +1,21 @@
 \maketitle
 
-% --- 前言 ---
-\noindent\textbf{写在前面：} \\
-这份文档演示了 \texttt{elegantexam} 模板的所有功能。本模板最大的特点是\textbf{审美在线}（内置设计师配色）和\textbf{操作简单}（傻瓜式开关）。请大家在整理真题时，严格按照以下规范录入。
+\thispagestyle{empty}
 
-% =======================================================
-\section{色彩与主题切换}
-% =======================================================
+\vspace{5cm}
 
-我们拒绝“辣眼睛”的自定义配色，而是锁定了 6 款符合学术审美的颜色。
+\begin{center}
+    \zihao{3}
+    \songti
+    \textbf{V1.0.1 离散数学(CS)} 
 
-\begin{enumerate}
-    \item 现在的解析框、水印、标题是什么颜色？ \kh[A]
-    \xx{跟随主题色}{总是蓝色}{总是黑色}{随机颜色}
-    
-    \begin{solution}
-        \textbf{解析：} 当前设置的是 \texttt{blue}。你可以尝试在 \texttt{main.tex} 第 15 行将 \texttt{blue} 改为 \texttt{orange} 或 \texttt{red}，然后重新编译。你会发现：
-        \begin{itemize}
-            \item 标题颜色变了；
-            \item 下划线颜色变了；
-            \item 解析框的背景色自动变成了对应颜色的淡色版本；
-            \item 全屏水印的颜色也跟着变了。
-        \end{itemize}
-    \end{solution}
-\end{enumerate}
+    \textbf{课程习题集 | \LaTeX}
+\end{center}
 
-% =======================================================
-\section{选择题排版规范 (三种模式)}
-% =======================================================
+\newpage
 
-为了版面整洁，我们提供了三种排版命令，请根据**选项文字长度**灵活选择。
-
-\begin{enumerate}
-    \item \textbf{【短选项 - 四栏】} 选项是数字或短语时，用 \texttt{\textbackslash xx}：\kh[A]
-    \xx{短路}{开路}{电压源}{电流源}
-
-    \item \textbf{【中等选项 - 双栏】} 选项约半行长时，用 \texttt{\textbackslash xxtwo}：\kh[B]
-    \xxtwo{这是稍微长一点的选项A}{这是稍微长一点的选项B}
-          {这是稍微长一点的选项C}{这是稍微长一点的选项D}
-
-    \item \textbf{【长选项 - 单栏】} 选项是整句或包含长公式时，\textbf{必须}用 \texttt{\textbackslash xxone}：\kh[C]
-    \xxone{戴维宁等效电阻等于端口开路电压除以短路电流}
-          {这是一个非常长的选项，如果强行挤在两栏里会非常难看}
-          {对外电路而言，线性有源二端网络可等效为电压源与电阻串联}
-          {选项里有公式 $\oint \vec{E} \cdot d\vec{l} = 0$ 时也要用单栏}
-\end{enumerate}
-
-% =======================================================
-\section{智能填空题规范}
-% =======================================================
-
-填空题命令 \texttt{\textbackslash tk\{答案\}} 会自动处理下划线长度。
-
-\begin{enumerate}
-    \item \textbf{普通填空}：若电压有效值为 220V，则最大值为 \tk{311} V。
-    \item \textbf{长填空}：基尔霍夫电流定律体现了 \tk{电荷守恒定律}。
-    \item \textbf{指定宽度}：如果想给刷题版留更多位置，可以指定宽度：\tk[4cm]{阻抗变换}。
-\end{enumerate}
-
-% =======================================================
-\section{大题与解析录入}
-% =======================================================
-
-\textbf{1. (10分) 请简述如何导出“学生刷题版”PDF？}
-
-\begin{solution}
-    \textbf{操作步骤：}
-    \begin{enumerate}
-        \item 打开 \texttt{main.tex} 文件；
-        \item 找到“功能开关控制台”区域；
-        \item 将 \texttt{\textbackslash showanswerstrue} 修改为 \texttt{\textbackslash showanswersfalse}；
-        \item 点击 Recompile，此时答案消失、解析框隐藏；
-        \item 下载 PDF，重命名为“刷题版.pdf”。
-    \end{enumerate}
-\end{solution}
-
-\vspace{2cm} % 手动留白示例
-
-\textbf{2. (10分) 如何在解析中插入公式和图片？}
-
-\begin{solution}
-    直接写 LaTeX 代码即可，解析框会自动包裹它们。
-    $$ P = UI \cos \varphi $$
-    图片请使用 \texttt{center} 环境。
-\end{solution}
+\pagestyle{plain}
+\setcounter{page}{1}
+\tableofcontents
+\newpage
+\setcounter{page}{1}

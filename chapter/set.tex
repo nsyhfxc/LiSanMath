@@ -1,0 +1,776 @@
+\section{集合论}
+
+\subsection{集合的基本概念}
+
+\subsubsection{集合、元素与表示}
+
+\begin{enumerate}
+	\item \textbf{集合}：由确定的、互异的对象组成的无序整体。对象称为集合的元素。
+	\item 若 \(a\) 是集合 \(A\) 的元素，记作 \(a\in A\)；否则记作 \(a\notin A\)。
+	\item \textbf{列举法}：
+	\[
+	A=\{1,2,3\}.
+	\]
+	\item \textbf{描述法}：
+	\[
+	B=\{x\mid x\in\mathbb{Z},\ 0<x<4\}.
+	\]
+	\item \textbf{集合相等}：
+	\[
+	A=B\Leftrightarrow \forall x(x\in A\leftrightarrow x\in B).
+	\]
+	\item \textbf{子集}：
+	\[
+	A\subseteq B\Leftrightarrow \forall x(x\in A\to x\in B).
+	\]
+	若 \(A\subseteq B\) 且 \(A\ne B\)，则 \(A\) 是 \(B\) 的真子集，记作 \(A\subset B\)。
+	\item \textbf{空集}：不含任何元素的集合，记作 \(\varnothing\)。
+	\item \textbf{全集}：在固定讨论范围内包含所有对象的集合，记作 \(E\) 或 \(U\)。
+\end{enumerate}
+
+\subsubsection{幂集}
+
+集合 \(A\) 的所有子集构成的集合称为 \(A\) 的幂集，记作 \(\mathcal{P}(A)\)。若 \(|A|=n\)，则
+\[
+|\mathcal{P}(A)|=2^n.
+\]
+
+\begin{question}{例题1}
+	设 \(A=\{a,b,c\}\)，写出 \(\mathcal{P}(A)\)。
+	
+	\begin{solution}
+	\[
+	\mathcal{P}(A)=\{\varnothing,\{a\},\{b\},\{c\},\{a,b\},\{a,c\},\{b,c\},\{a,b,c\}\}.
+	\]
+	\end{solution}
+\end{question}
+
+\subsection{集合运算}
+
+\subsubsection{基本运算}
+
+设 \(A,B\subseteq E\)，则：
+\begin{enumerate}
+	\item \textbf{并集}
+	\[
+	A\cup B=\{x\mid x\in A\lor x\in B\}.
+	\]
+	\item \textbf{交集}
+	\[
+	A\cap B=\{x\mid x\in A\land x\in B\}.
+	\]
+	\item \textbf{补集}
+	\[
+	\overline{A}=E-A=\{x\mid x\in E\land x\notin A\}.
+	\]
+	\item \textbf{差集}
+	\[
+	A-B=\{x\mid x\in A\land x\notin B\}=A\cap\overline{B}.
+	\]
+	\item \textbf{对称差}
+	\[
+	A\oplus B=(A-B)\cup(B-A)=(A\cup B)-(A\cap B).
+	\]
+\end{enumerate}
+
+\subsubsection{集合运算律}
+
+网页图片中的运算性质整理如下。
+
+\begin{center}
+	\begin{tabular}{cl}
+		\toprule
+		名称 & 公式\\
+		\midrule
+		幂等律 & \(A\cup A=A,\quad A\cap A=A\)\\
+		交换律 & \(A\cup B=B\cup A,\quad A\cap B=B\cap A\)\\
+		结合律 & \((A\cup B)\cup C=A\cup(B\cup C)\)\\
+		       & \((A\cap B)\cap C=A\cap(B\cap C)\)\\
+		同一律 & \(A\cup\varnothing=A,\quad A\cap E=A\)\\
+		零律 & \(A\cup E=E,\quad A\cap\varnothing=\varnothing\)\\
+		分配律 & \(A\cap(B\cup C)=(A\cap B)\cup(A\cap C)\)\\
+		       & \(A\cup(B\cap C)=(A\cup B)\cap(A\cup C)\)\\
+		吸收律 & \(A\cap(A\cup B)=A,\quad A\cup(A\cap B)=A\)\\
+		双重否定律 & \(\overline{\overline{A}}=A\)\\
+		排中律 & \(A\cup\overline{A}=E\)\\
+		矛盾律 & \(A\cap\overline{A}=\varnothing\)\\
+		德摩根律 & \(\overline{A\cup B}=\overline{A}\cap\overline{B}\)\\
+		          & \(\overline{A\cap B}=\overline{A}\cup\overline{B}\)\\
+		\bottomrule
+	\end{tabular}
+\end{center}
+
+常用补充公式：
+\[
+\overline{\varnothing}=E,\qquad \overline{E}=\varnothing,
+\]
+\[
+A-B=A-(A\cap B),
+\]
+\[
+A\subseteq B\Leftrightarrow \overline{B}\subseteq\overline{A}.
+\]
+
+\subsubsection{对称差的性质}
+
+\begin{enumerate}
+	\item 交换律：
+	\[
+	A\oplus B=B\oplus A.
+	\]
+	\item 结合律：
+	\[
+	(A\oplus B)\oplus C=A\oplus(B\oplus C).
+	\]
+	\item 同一律：
+	\[
+	A\oplus\varnothing=A.
+	\]
+	\item 零律：
+	\[
+	A\oplus A=\varnothing,\qquad A\oplus\overline{A}=E.
+	\]
+	\item 交对对称差可分配：
+	\[
+	A\cap(B\oplus C)=(A\cap B)\oplus(A\cap C).
+	\]
+	\item 消去性质：
+	\[
+	A\oplus B=C\Rightarrow A\oplus C=B.
+	\]
+\end{enumerate}
+
+\begin{question}{例题2}
+	证明 \(A-(B\cup C)=(A-B)\cap(A-C)\)。
+	
+	\begin{solution}
+	\begin{align*}
+	A-(B\cup C)
+	&=A\cap\overline{B\cup C}\\
+	&=A\cap(\overline{B}\cap\overline{C})\\
+	&=(A\cap\overline{B})\cap(A\cap\overline{C})\\
+	&=(A-B)\cap(A-C).
+	\end{align*}
+	\end{solution}
+\end{question}
+
+\subsection{容斥原理}
+
+\subsubsection{有限集计数公式}
+
+\begin{enumerate}
+	\item 两个集合：
+	\[
+	|A\cup B|=|A|+|B|-|A\cap B|.
+	\]
+	\item 三个集合：
+	\[
+	\begin{aligned}
+	|A\cup B\cup C|
+	&=|A|+|B|+|C|\\
+	&\quad-|A\cap B|-|A\cap C|-|B\cap C|\\
+	&\quad+|A\cap B\cap C|.
+	\end{aligned}
+	\]
+	\item \(n\) 个集合：
+	\[
+	\begin{aligned}
+	\left|\bigcup_{i=1}^{n}A_i\right|
+	&=\sum_{i=1}^{n}|A_i|
+	-\sum_{i<j}|A_i\cap A_j|\\
+	&\quad+\sum_{i<j<k}|A_i\cap A_j\cap A_k|
+	-\cdots\\
+	&\quad+(-1)^{n-1}\left|\bigcap_{i=1}^{n}A_i\right|.
+	\end{aligned}
+	\]
+	\item 全不属于：
+	\[
+	\left|\overline{A_1}\cap\overline{A_2}\cap\cdots\cap\overline{A_n}\right|
+	=|E|-\left|A_1\cup A_2\cup\cdots\cup A_n\right|.
+	\]
+\end{enumerate}
+
+\begin{question}{例题3}
+	某班 \(45\) 人，喜欢数学的有 \(28\) 人，喜欢英语的有 \(20\) 人，两门都喜欢的有 \(12\) 人。至少喜欢一门的有多少人？两门都不喜欢的有多少人？
+	
+	\begin{solution}
+	设 \(A\) 为喜欢数学的人，\(B\) 为喜欢英语的人。
+	\[
+	|A\cup B|=28+20-12=36.
+	\]
+	至少喜欢一门的有 \(36\) 人，两门都不喜欢的有
+	\[
+	45-36=9
+	\]
+	人。
+	\end{solution}
+\end{question}
+
+\subsection{序偶与笛卡尔积}
+
+\subsubsection{序偶}
+
+有顺序的二元组称为序偶，记作 \(\langle a,b\rangle\)。序偶相等当且仅当对应分量相等：
+\[
+\langle a,b\rangle=\langle c,d\rangle\Leftrightarrow a=c\land b=d.
+\]
+一般地，\(\langle a,b\rangle\ne\langle b,a\rangle\)。
+
+\subsubsection{笛卡尔积}
+
+集合 \(A\) 与 \(B\) 的笛卡尔积为
+\[
+A\times B=\{\langle a,b\rangle\mid a\in A,\ b\in B\}.
+\]
+若 \(|A|=m,|B|=n\)，则
+\[
+|A\times B|=mn.
+\]
+特别地，
+\[
+A\times\varnothing=\varnothing\times A=\varnothing.
+\]
+
+笛卡尔积满足以下分配性质：
+\[
+A\times(B\cap C)=(A\times B)\cap(A\times C),
+\]
+\[
+A\times(B\cup C)=(A\times B)\cup(A\times C),
+\]
+\[
+(A\cap B)\times C=(A\times C)\cap(B\times C),
+\]
+\[
+(A\cup B)\times C=(A\times C)\cup(B\times C).
+\]
+
+若 \(A,B,C,D\) 非空，则
+\[
+A\times B\subseteq C\times D\Leftrightarrow A\subseteq C\land B\subseteq D.
+\]
+
+\begin{question}{例题4}
+	设 \(A=\{1,2\}\)，\(B=\{a,b,c\}\)，求 \(A\times B\)。
+	
+	\begin{solution}
+	\[
+	A\times B=\{\langle1,a\rangle,\langle1,b\rangle,\langle1,c\rangle,\langle2,a\rangle,\langle2,b\rangle,\langle2,c\rangle\}.
+	\]
+	\end{solution}
+\end{question}
+
+\subsection{关系}
+
+\subsubsection{关系的基础概念}
+
+\begin{enumerate}
+	\item 从 \(A\) 到 \(B\) 的二元关系是 \(A\times B\) 的任意子集。若 \(R\subseteq A\times B\)，且 \(\langle x,y\rangle\in R\)，可记作 \(xRy\)。
+	\item 若 \(R\subseteq A\times A\)，则称 \(R\) 是 \(A\) 上的二元关系。
+	\item 前域、值域、域：
+	\[
+	\operatorname{dom}R=\{x\mid \exists y,\ \langle x,y\rangle\in R\},
+	\]
+	\[
+	\operatorname{ran}R=\{y\mid \exists x,\ \langle x,y\rangle\in R\},
+	\]
+	\[
+	\operatorname{fld}R=\operatorname{dom}R\cup\operatorname{ran}R.
+	\]
+\end{enumerate}
+
+\subsubsection{关系矩阵与关系图}
+
+设 \(A=\{a_1,\dots,a_m\}\)，\(B=\{b_1,\dots,b_n\}\)，关系 \(R\subseteq A\times B\) 的关系矩阵为 \(M_R=(r_{ij})_{m\times n}\)，其中
+\[
+r_{ij}=
+\begin{cases}
+1,&\langle a_i,b_j\rangle\in R,\\
+0,&\langle a_i,b_j\rangle\notin R.
+\end{cases}
+\]
+关系图则把集合元素画成结点，若 \(a_iRa_j\)，就从 \(a_i\) 向 \(a_j\) 画一条有向边。
+
+\begin{question}{例题5}
+	设 \(A=\{1,2,3\}\)，\(B=\{a,b,c\}\)，
+	\[
+	R=\{\langle1,a\rangle,\langle1,c\rangle,\langle2,a\rangle,\langle2,b\rangle\}.
+	\]
+	求 \(\operatorname{dom}R,\operatorname{ran}R,\operatorname{fld}R\)。
+	
+	\begin{solution}
+	\[
+	\operatorname{dom}R=\{1,2\},\qquad \operatorname{ran}R=\{a,b,c\},
+	\]
+	\[
+	\operatorname{fld}R=\{1,2,a,b,c\}.
+	\]
+	\end{solution}
+\end{question}
+
+\subsubsection{关系的五种性质}
+
+设 \(R\) 是 \(A\) 上的关系。
+\begin{enumerate}
+	\item \textbf{自反性}：
+	\[
+	\forall x\in A,\ xRx.
+	\]
+	矩阵主对角线全为 \(1\)，关系图每个结点都有自环。
+	\item \textbf{反自反性}：
+	\[
+	\forall x\in A,\ \neg xRx.
+	\]
+	矩阵主对角线全为 \(0\)，关系图每个结点都没有自环。
+	\item \textbf{对称性}：
+	\[
+	\forall x,y\in A,\ xRy\to yRx.
+	\]
+	矩阵为对称矩阵。
+	\item \textbf{反对称性}：
+	\[
+	\forall x,y\in A,\ (xRy\land yRx)\to x=y.
+	\]
+	主对角线外的对称位置不能同时为 \(1\)。
+	\item \textbf{传递性}：
+	\[
+	\forall x,y,z\in A,\ (xRy\land yRz)\to xRz.
+	\]
+\end{enumerate}
+
+\begin{center}
+	\begin{tabular}{cccccc}
+		\toprule
+		关系 & 自反 & 反自反 & 对称 & 反对称 & 传递\\
+		\midrule
+		空关系 \(\varnothing\) & 否（若 \(A\ne\varnothing\)） & 是 & 是 & 是 & 是\\
+		全域关系 \(A\times A\) & 是 & 否 & 是 & 否（若 \(|A|>1\)） & 是\\
+		恒等关系 \(I_A\) & 是 & 否（若 \(A\ne\varnothing\)） & 是 & 是 & 是\\
+		\bottomrule
+	\end{tabular}
+\end{center}
+
+\subsubsection{复合关系与逆关系}
+
+若 \(R\subseteq X\times Y\)，\(S\subseteq Y\times Z\)，则复合关系为
+\[
+R\circ S=\{\langle x,z\rangle\mid x\in X,\ z\in Z,\ \exists y\in Y,\ xRy\land ySz\}.
+\]
+这里采用“先 \(R\)，再 \(S\)”的记号习惯。
+
+关系 \(R\) 的逆关系为
+\[
+R^{-1}=\{\langle y,x\rangle\mid \langle x,y\rangle\in R\}.
+\]
+
+\subsubsection{闭包运算}
+
+设 \(R\) 是集合 \(A\) 上的关系。闭包是在尽量少添加序偶的前提下，让关系满足某种性质。
+\begin{enumerate}
+	\item 自反闭包：
+	\[
+	r(R)=R\cup I_A,\qquad I_A=\{\langle x,x\rangle\mid x\in A\}.
+	\]
+	\item 对称闭包：
+	\[
+	s(R)=R\cup R^{-1}.
+	\]
+	\item 传递闭包：
+	\[
+	t(R)=R\cup R^2\cup R^3\cup\cdots.
+	\]
+	若 \(|A|=n\)，则
+	\[
+	t(R)=R\cup R^2\cup\cdots\cup R^n.
+	\]
+\end{enumerate}
+
+常用判定：
+\[
+R\text{ 自反}\Leftrightarrow r(R)=R,\quad
+R\text{ 对称}\Leftrightarrow s(R)=R,\quad
+R\text{ 传递}\Leftrightarrow t(R)=R.
+\]
+
+\begin{question}{例题6}
+	设 \(A=\{1,2,3\}\)，\(R=\{\langle1,2\rangle,\langle2,3\rangle\}\)，求 \(r(R),s(R),t(R)\)。
+	
+	\begin{solution}
+	\[
+	r(R)=\{\langle1,1\rangle,\langle2,2\rangle,\langle3,3\rangle,\langle1,2\rangle,\langle2,3\rangle\}.
+	\]
+	\[
+	s(R)=\{\langle1,2\rangle,\langle2,1\rangle,\langle2,3\rangle,\langle3,2\rangle\}.
+	\]
+	传递性要求由 \(\langle1,2\rangle,\langle2,3\rangle\) 补上 \(\langle1,3\rangle\)，故
+	\[
+	t(R)=\{\langle1,2\rangle,\langle2,3\rangle,\langle1,3\rangle\}.
+	\]
+	\end{solution}
+\end{question}
+
+\subsubsection{集合的划分}
+
+非空集合 \(A\) 的一个划分是集合族 \(\{S_1,S_2,\dots,S_n\}\)，满足
+\[
+S_i\ne\varnothing,\qquad S_i\subseteq A,
+\]
+\[
+S_1\cup S_2\cup\cdots\cup S_n=A,
+\]
+\[
+i\ne j\Rightarrow S_i\cap S_j=\varnothing.
+\]
+划分一定覆盖 \(A\)，但覆盖不一定是划分，因为覆盖中的各块可能相交。
+
+\subsubsection{等价关系与等价类}
+
+\begin{enumerate}
+	\item 若 \(R\) 在 \(A\) 上满足自反、对称和传递，则称 \(R\) 是 \(A\) 上的等价关系。
+	\item 元素 \(x\) 的等价类为
+	\[
+	[x]_R=\{y\in A\mid xRy\}.
+	\]
+	\item 商集为
+	\[
+	A/R=\{[a]_R\mid a\in A\}.
+	\]
+	\item 等价类性质：
+	\[
+	[x]_R=[y]_R\Leftrightarrow xRy,
+	\]
+	\[
+	[x]_R\ne[y]_R\Rightarrow [x]_R\cap[y]_R=\varnothing.
+	\]
+	\item 等价关系与划分一一对应：每个等价关系诱导一个划分；每个划分确定一个等价关系。
+\end{enumerate}
+
+\begin{question}{例题7}
+	在 \(\mathbb{Z}\) 上定义 \(aRb\Leftrightarrow a\equiv b\pmod 3\)，求商集。
+	
+	\begin{solution}
+	\[
+	[0]=\{3k\mid k\in\mathbb{Z}\},\quad
+	[1]=\{3k+1\mid k\in\mathbb{Z}\},\quad
+	[2]=\{3k+2\mid k\in\mathbb{Z}\}.
+	\]
+	因此
+	\[
+	\mathbb{Z}/R=\{[0],[1],[2]\}.
+	\]
+	\end{solution}
+\end{question}
+
+\subsubsection{相容关系}
+
+若 \(R\) 是 \(A\) 上自反且对称的关系，则称 \(R\) 为相容关系。若 \(C\subseteq A\)，且
+\[
+\forall x,y\in C,\ xRy,
+\]
+则 \(C\) 为相容类；极大的相容类称为最大相容类。相容关系不要求传递。
+
+\subsubsection{序关系}
+
+\begin{enumerate}
+	\item \textbf{偏序关系}：若 \(R\) 在 \(A\) 上满足自反、反对称、传递，则 \(R\) 为偏序关系，记作 \(\preceq\)。\(\langle A,\preceq\rangle\) 称为偏序集。
+	\item \textbf{严格偏序}：\(x\prec y\) 表示 \(x\preceq y\) 且 \(x\ne y\)。
+	\item \textbf{盖住}：若 \(x\prec y\)，且不存在 \(z\in A\) 使 \(x\prec z\prec y\)，则称 \(y\) 盖住 \(x\)。
+	\item \textbf{链}：任意两个元素都可比较的子集。
+	\item \textbf{反链}：任意两个不同元素都不可比较的子集。
+	\item \textbf{全序}：任意两个元素都可比较的偏序。
+	\item \textbf{哈斯图}：省略自环和传递边，并默认方向向上。
+\end{enumerate}
+
+设 \(B\subseteq A\)。偏序集中的特殊元素如下：
+\begin{enumerate}
+	\item \(y\in B\) 是最小元：\(\forall x\in B,\ y\preceq x\)。
+	\item \(y\in B\) 是最大元：\(\forall x\in B,\ x\preceq y\)。
+	\item \(y\in B\) 是极小元：不存在 \(x\in B\) 使 \(x\prec y\)。
+	\item \(y\in B\) 是极大元：不存在 \(x\in B\) 使 \(y\prec x\)。
+	\item \(y\in A\) 是上界：\(\forall x\in B,\ x\preceq y\)。
+	\item \(y\in A\) 是下界：\(\forall x\in B,\ y\preceq x\)。
+	\item 上界集合中的最小元称为最小上界或上确界，记作 \(\sup B\)。
+	\item 下界集合中的最大元称为最大下界或下确界，记作 \(\inf B\)。
+\end{enumerate}
+
+\subsection{函数}
+
+\subsubsection{基本概念}
+
+\begin{enumerate}
+	\item 函数是一类特殊的二元关系：对每个 \(x\in\operatorname{dom}f\)，存在唯一的 \(y\) 与之对应，记为 \(y=f(x)\)。
+	\item 若函数 \(f\) 的定义域为 \(A\)，共域为 \(B\)，记作
+	\[
+	f:A\to B.
+	\]
+	\item 若 \(C\subseteq A\)，则
+	\[
+	f(C)=\{f(x)\mid x\in C\}.
+	\]
+	若 \(D\subseteq B\)，则
+	\[
+	f^{-1}(D)=\{x\in A\mid f(x)\in D\}.
+	\]
+\end{enumerate}
+
+\subsubsection{单射、满射、双射}
+
+\begin{enumerate}
+	\item \textbf{单射}：
+	\[
+	f(x_1)=f(x_2)\Rightarrow x_1=x_2.
+	\]
+	\item \textbf{满射}：
+	\[
+	\forall y\in B,\exists x\in A,\ f(x)=y.
+	\]
+	\item \textbf{双射}：既是单射又是满射。双射也称一一对应。
+\end{enumerate}
+
+\subsubsection{复合函数、反函数、特征函数}
+
+若 \(f:A\to B\)，\(g:B\to C\)，则
+\[
+(g\circ f)(x)=g(f(x)).
+\]
+函数复合满足结合律，但一般不满足交换律。
+
+若 \(f:A\to B\) 是双射，则存在反函数 \(f^{-1}:B\to A\)，满足
+\[
+f^{-1}(f(x))=x,\qquad f(f^{-1}(y))=y.
+\]
+
+设 \(A\subseteq E\)，集合 \(A\) 的特征函数为
+\[
+\chi_A:E\to\{0,1\},\qquad
+\chi_A(x)=
+\begin{cases}
+1,&x\in A,\\
+0,&x\notin A.
+\end{cases}
+\]
+
+\subsubsection{基数与等势}
+
+若存在从 \(A\) 到 \(B\) 的双射，则称 \(A\) 与 \(B\) 等势，记作 \(A\approx B\)。常见结论：
+\[
+\mathbb{N}\approx\mathbb{Z}\approx\mathbb{Q}\approx\mathbb{N}\times\mathbb{N}.
+\]
+与 \(\mathbb{N}\) 等势的无限集合称为可数无限集；有限集和可数无限集统称至多可数集。
+
+\begin{question}{例题8}
+	证明偶数集 \(2\mathbb{Z}=\{2k\mid k\in\mathbb{Z}\}\) 与整数集 \(\mathbb{Z}\) 等势。
+	
+	\begin{solution}
+	构造
+	\[
+	f:\mathbb{Z}\to2\mathbb{Z},\qquad f(k)=2k.
+	\]
+	若 \(f(k_1)=f(k_2)\)，则 \(2k_1=2k_2\)，故 \(k_1=k_2\)，所以 \(f\) 是单射。任取 \(y\in2\mathbb{Z}\)，存在 \(k\in\mathbb{Z}\) 使 \(y=2k=f(k)\)，所以 \(f\) 是满射。因此 \(f\) 是双射。
+	\end{solution}
+\end{question}
+
+\subsection{集合论考试补充}
+
+\subsubsection{集合成员关系与包含关系}
+
+考试中最容易混淆的是 \(\in\) 与 \(\subseteq\)：
+\begin{enumerate}
+	\item \(a\in A\)：\(a\) 是集合 \(A\) 的元素。
+	\item \(B\subseteq A\)：\(B\) 的每个元素都是 \(A\) 的元素，此时 \(B\) 必须是集合。
+	\item \(\varnothing\subseteq A\) 对任意集合 \(A\) 成立。
+	\item \(\varnothing\in A\) 不一定成立，只有当空集本身是 \(A\) 的一个元素时才成立。
+\end{enumerate}
+
+例如 \(A=\{a,\{a\}\}\)，则
+\[
+a\in A,\qquad \{a\}\in A,\qquad \{a\}\subseteq A,\qquad \{\{a\}\}\subseteq A.
+\]
+又因为 \(\mathcal P(A)\) 的元素是 \(A\) 的子集，所以
+\[
+\{a\}\in\mathcal P(A),\qquad \{\{a\}\}\in\mathcal P(A).
+\]
+
+\subsubsection{二元关系数量}
+
+若 \(|A|=n\)，则
+\[
+|A\times A|=n^2.
+\]
+\(A\) 上任一二元关系都是 \(A\times A\) 的子集，所以 \(A\) 上二元关系的个数为
+\[
+|\mathcal P(A\times A)|=2^{n^2}.
+\]
+从 \(A\) 到 \(B\) 的二元关系个数为
+\[
+2^{|A||B|}.
+\]
+
+\subsubsection{关系复合计算技巧}
+
+计算 \(R\circ S\) 时，找“中间项”：
+\[
+\langle x,z\rangle\in R\circ S
+\Leftrightarrow
+\exists y(\langle x,y\rangle\in R\land\langle y,z\rangle\in S).
+\]
+
+\begin{question}{例题9}
+	设
+	\[
+	R=\{\langle1,2\rangle,\langle2,4\rangle,\langle3,3\rangle\},
+	\quad
+	S=\{\langle1,3\rangle,\langle2,4\rangle,\langle4,2\rangle\}.
+	\]
+	按本文记号求 \(R\circ S\)。
+	
+	\begin{solution}
+	从 \(R\) 的第二分量出发找 \(S\) 的第一分量：
+	\[
+	\langle1,2\rangle\in R,\ \langle2,4\rangle\in S\Rightarrow\langle1,4\rangle\in R\circ S,
+	\]
+	\[
+	\langle2,4\rangle\in R,\ \langle4,2\rangle\in S\Rightarrow\langle2,2\rangle\in R\circ S.
+	\]
+	\(\langle3,3\rangle\) 后面没有以 \(3\) 为第一分量的 \(S\) 中序偶，所以
+	\[
+	R\circ S=\{\langle1,4\rangle,\langle2,2\rangle\}.
+	\]
+	\end{solution}
+\end{question}
+
+\subsubsection{Warshall 算法求传递闭包}
+
+设 \(R\) 在 \(A=\{a_1,\dots,a_n\}\) 上的关系矩阵为 \(M=(m_{ij})\)。Warshall 算法可求传递闭包矩阵。
+
+\begin{enumerate}
+	\item 令 \(W=M\)。
+	\item 对 \(k=1,2,\dots,n\)，若 \(w_{ik}=1\) 且 \(w_{kj}=1\)，则令 \(w_{ij}=1\)。
+	\item 最终矩阵 \(W\) 即为 \(t(R)\) 的关系矩阵。
+\end{enumerate}
+
+等价地，可写成布尔运算：
+\[
+w_{ij}\leftarrow w_{ij}\lor(w_{ik}\land w_{kj}).
+\]
+
+\subsubsection{偏序集解题步骤}
+
+哈斯图题目可按以下步骤做：
+\begin{enumerate}
+	\item 先补自反边和传递边，得到完整偏序关系。
+	\item 找极大元：图中没有更高元素覆盖它的点。
+	\item 找极小元：图中没有更低元素被它覆盖的点。
+	\item 最大元必须高于集合内所有点；最小元必须低于集合内所有点。
+	\item 上界、下界可以在全集 \(A\) 中找，不要求属于子集 \(B\)。
+	\item 上确界是所有上界中的最小者；下确界是所有下界中的最大者。
+\end{enumerate}
+
+\subsubsection{函数判定技巧}
+
+关系 \(f\subseteq A\times B\) 是从 \(A\) 到 \(B\) 的函数，当且仅当每个 \(a\in A\) 恰好对应一个 \(b\in B\)。
+\begin{enumerate}
+	\item 若某个 \(a\in A\) 没有像，则不是函数。
+	\item 若某个 \(a\in A\) 有两个或更多不同的像，则不是函数。
+	\item 判单射看不同自变量是否能得到同一函数值。
+	\item 判满射看 \(B\) 中每个元素是否都被取到。
+\end{enumerate}
+
+\subsection{本章重点定义与定理速查}
+
+\subsubsection{集合与集合运算}
+
+\begin{enumerate}
+	\item \textbf{外延公理思想}：两个集合相等当且仅当它们含有完全相同的元素：
+	\[
+	A=B\Leftrightarrow \forall x(x\in A\leftrightarrow x\in B).
+	\]
+	\item \textbf{子集定义}：
+	\[
+	A\subseteq B\Leftrightarrow \forall x(x\in A\to x\in B).
+	\]
+	证明 \(A=B\) 常用“双包含法”：先证 \(A\subseteq B\)，再证 \(B\subseteq A\)。
+	\item \textbf{幂集定义}：\(\mathcal P(A)\) 是 \(A\) 的所有子集组成的集合。若 \(|A|=n\)，则
+	\[
+	|\mathcal P(A)|=2^n.
+	\]
+	\item \textbf{笛卡尔积}：
+	\[
+	A\times B=\{\langle a,b\rangle\mid a\in A,\ b\in B\}.
+	\]
+	若 \(|A|=m,|B|=n\)，则 \(|A\times B|=mn\)。
+	\item \textbf{容斥原理}：
+	\[
+	|A\cup B|=|A|+|B|-|A\cap B|.
+	\]
+	三集合情形为
+	\[
+	|A\cup B\cup C|=|A|+|B|+|C|-|A\cap B|-|A\cap C|-|B\cap C|+|A\cap B\cap C|.
+	\]
+\end{enumerate}
+
+\subsubsection{关系核心定义}
+
+\begin{enumerate}
+	\item \textbf{二元关系}：从 \(A\) 到 \(B\) 的二元关系是 \(A\times B\) 的任意子集。\(A\) 上二元关系是 \(A\times A\) 的任意子集。
+	\item \textbf{自反性}：
+	\[
+	\forall x\in A,\ \langle x,x\rangle\in R.
+	\]
+	\item \textbf{反自反性}：
+	\[
+	\forall x\in A,\ \langle x,x\rangle\notin R.
+	\]
+	\item \textbf{对称性}：
+	\[
+	\langle x,y\rangle\in R\Rightarrow\langle y,x\rangle\in R.
+	\]
+	\item \textbf{反对称性}：
+	\[
+	\langle x,y\rangle\in R\land\langle y,x\rangle\in R\Rightarrow x=y.
+	\]
+	注意反对称不是“没有对称边”，自环不影响反对称性。
+	\item \textbf{传递性}：
+	\[
+	\langle x,y\rangle\in R\land\langle y,z\rangle\in R\Rightarrow\langle x,z\rangle\in R.
+	\]
+	\item \textbf{逆关系}：
+	\[
+	R^{-1}=\{\langle y,x\rangle\mid \langle x,y\rangle\in R\}.
+	\]
+	\item \textbf{复合关系}：
+	\[
+	R\circ S=\{\langle x,z\rangle\mid \exists y(\langle x,y\rangle\in R\land \langle y,z\rangle\in S)\}.
+	\]
+\end{enumerate}
+
+\subsubsection{关系重要定理}
+
+\begin{enumerate}
+	\item \textbf{关系个数定理}：若 \(|A|=n\)，则 \(A\) 上二元关系共有 \(2^{n^2}\) 个；从 \(A\) 到 \(B\) 的二元关系共有 \(2^{|A||B|}\) 个。
+	\item \textbf{闭包最小性}：自反闭包 \(r(R)\)、对称闭包 \(s(R)\)、传递闭包 \(t(R)\) 分别是包含 \(R\) 的最小自反、对称、传递关系。
+	\item \textbf{传递闭包公式}：有限集合 \(A\) 上，若 \(|A|=n\)，则
+	\[
+	t(R)=R\cup R^2\cup\cdots\cup R^n.
+	\]
+	\item \textbf{等价关系定理}：关系 \(R\) 是等价关系，当且仅当 \(R\) 自反、对称、传递。
+	\item \textbf{等价关系与划分定理}：集合 \(A\) 上每个等价关系唯一确定 \(A\) 的一个划分；反过来，\(A\) 的每个划分也唯一确定一个等价关系。
+	\item \textbf{偏序关系定理}：关系 \(R\) 是偏序关系，当且仅当 \(R\) 自反、反对称、传递。
+	\item \textbf{全序}：偏序集 \(\langle A,\le\rangle\) 中任意两个元素都可比较，则称为全序集或线序集。
+\end{enumerate}
+
+\subsubsection{函数核心定义与定理}
+
+\begin{enumerate}
+	\item \textbf{函数}：关系 \(f\subseteq A\times B\) 是函数，当且仅当每个 \(a\in A\) 有唯一的像 \(f(a)\in B\)。
+	\item \textbf{单射}：\(f(a_1)=f(a_2)\Rightarrow a_1=a_2\)。有限集合中也可通过“不同元素像不同”判定。
+	\item \textbf{满射}：对任意 \(b\in B\)，存在 \(a\in A\)，使 \(f(a)=b\)。
+	\item \textbf{双射}：既是单射又是满射。双射刻画两个集合元素个数相同或等势。
+	\item \textbf{复合函数结合律}：
+	\[
+	h\circ(g\circ f)=(h\circ g)\circ f.
+	\]
+	\item \textbf{反函数存在定理}：函数 \(f:A\to B\) 存在反函数 \(f^{-1}:B\to A\)，当且仅当 \(f\) 是双射。
+	\item \textbf{有限集鸽巢判定}：若 \(|A|>|B|\)，则不存在从 \(A\) 到 \(B\) 的单射；若 \(|A|<|B|\)，则不存在从 \(A\) 到 \(B\) 的满射。
+	\item \textbf{函数计数}：若 \(|A|=m,|B|=n\)，则从 \(A\) 到 \(B\) 的函数共有 \(n^m\) 个。
+\end{enumerate}

@@ -1,0 +1,379 @@
+\section{组合计数与递推关系}
+
+\subsection{基本计数原理}
+
+\subsubsection{加法原理与乘法原理}
+
+\begin{enumerate}
+	\item \textbf{加法原理}：若完成一件事有 \(k\) 类互不重叠的方法，第 \(i\) 类有 \(n_i\) 种，则共有
+	\[
+	n_1+n_2+\cdots+n_k
+	\]
+	种方法。
+	\item \textbf{乘法原理}：若完成一件事分 \(k\) 步，第 \(i\) 步有 \(n_i\) 种选择，则共有
+	\[
+	n_1n_2\cdots n_k
+	\]
+	种方法。
+\end{enumerate}
+
+\subsubsection{排列与组合}
+
+\begin{enumerate}
+	\item 不重复排列：
+	\[
+	P(n,r)=A_n^r=\frac{n!}{(n-r)!}.
+	\]
+	\item 不重复组合：
+	\[
+	C(n,r)=\binom nr=\frac{n!}{r!(n-r)!}.
+	\]
+	\item 圆排列：
+	\[
+	(n-1)!.
+	\]
+	\item 含重复元素的全排列：若 \(n\) 个元素中有 \(n_1,n_2,\dots,n_k\) 个分别相同，且 \(\sum n_i=n\)，则不同排列数为
+	\[
+	\frac{n!}{n_1!n_2!\cdots n_k!}.
+	\]
+	\item 允许重复的 \(r\) 排列：
+	\[
+	n^r.
+	\]
+\end{enumerate}
+
+\begin{question}{例题1}
+	由数字 \(1,2,3,4,5\) 组成没有重复数字的三位数，共有多少个？
+	
+	\begin{solution}
+	这是从 \(5\) 个数字中选 \(3\) 个并排列：
+	\[
+	P(5,3)=5\cdot4\cdot3=60.
+	\]
+	\end{solution}
+\end{question}
+
+\subsection{二项式定理与组合恒等式}
+
+\subsubsection{二项式定理}
+
+\[
+(x+y)^n=\sum_{k=0}^{n}\binom nk x^{n-k}y^k.
+\]
+
+常用特例：
+\[
+\sum_{k=0}^{n}\binom nk=2^n,
+\]
+\[
+\sum_{k=0}^{n}(-1)^k\binom nk=0\quad(n\ge1).
+\]
+
+\subsubsection{常用组合恒等式}
+
+\[
+\binom nr=\binom n{n-r},
+\]
+\[
+\binom nr=\binom{n-1}r+\binom{n-1}{r-1},
+\]
+\[
+\sum_{k=0}^{r}\binom mk\binom n{r-k}=\binom{m+n}r.
+\]
+
+\subsection{鸽巢原理}
+
+\subsubsection{基本形式}
+
+若把 \(n+1\) 个对象放入 \(n\) 个盒子，则至少有一个盒子中含有不少于 \(2\) 个对象。
+
+\subsubsection{推广形式}
+
+若把 \(N\) 个对象放入 \(k\) 个盒子，则至少有一个盒子中含有不少于
+\[
+\left\lceil\frac Nk\right\rceil
+\]
+个对象。
+
+\begin{question}{例题2}
+	从 \(13\) 个人中证明必有两个人出生月份相同。
+	
+	\begin{solution}
+	一年有 \(12\) 个月，把 \(13\) 个人按出生月份放入 \(12\) 个盒子。由鸽巢原理，至少有一个月份中有不少于
+	\[
+	\left\lceil\frac{13}{12}\right\rceil=2
+	\]
+	个人。
+	\end{solution}
+\end{question}
+
+\subsection{容斥原理的计数应用}
+
+设有限全集为 \(E\)，性质集合为 \(A_1,A_2,\dots,A_n\)。满足至少一个性质的对象数为
+\[
+\left|\bigcup_{i=1}^{n}A_i\right|.
+\]
+没有任何性质的对象数为
+\[
+|E|-\left|\bigcup_{i=1}^{n}A_i\right|.
+\]
+
+\begin{question}{例题3}
+	求 \(1\) 到 \(100\) 中能被 \(2\) 或 \(3\) 整除的整数个数。
+	
+	\begin{solution}
+	设 \(A\) 为能被 \(2\) 整除的数，\(B\) 为能被 \(3\) 整除的数。
+	\[
+	|A|=\left\lfloor\frac{100}{2}\right\rfloor=50,\quad
+	|B|=\left\lfloor\frac{100}{3}\right\rfloor=33,
+	\]
+	\[
+	|A\cap B|=\left\lfloor\frac{100}{6}\right\rfloor=16.
+	\]
+	所以
+	\[
+	|A\cup B|=50+33-16=67.
+	\]
+	\end{solution}
+\end{question}
+
+\subsection{递推关系}
+
+\subsubsection{递推关系与初始条件}
+
+用前若干项表示后一项的关系称为递推关系。递推关系加上足够的初始条件才能确定唯一数列。
+
+例如斐波那契数列：
+\[
+F_0=0,\quad F_1=1,\quad F_n=F_{n-1}+F_{n-2}\quad(n\ge2).
+\]
+
+\subsubsection{一阶线性递推}
+
+若
+\[
+a_n=ra_{n-1}+c,
+\]
+其中 \(r,c\) 为常数，则当 \(r\ne1\) 时
+\[
+a_n=r^na_0+c\frac{r^n-1}{r-1}.
+\]
+当 \(r=1\) 时
+\[
+a_n=a_0+nc.
+\]
+
+\begin{question}{例题4}
+	求递推
+	\[
+	a_n=2a_{n-1}+1,\quad a_0=0
+	\]
+	的通项。
+	
+	\begin{solution}
+	套用一阶线性递推公式，\(r=2,c=1\)，得
+	\[
+	a_n=2^n\cdot0+\frac{2^n-1}{2-1}=2^n-1.
+	\]
+	\end{solution}
+\end{question}
+
+\subsubsection{二阶常系数齐次线性递推}
+
+设
+\[
+a_n=c_1a_{n-1}+c_2a_{n-2}.
+\]
+其特征方程为
+\[
+\lambda^2-c_1\lambda-c_2=0.
+\]
+
+\begin{enumerate}
+	\item 若有两个不同实根 \(\lambda_1,\lambda_2\)，则
+	\[
+	a_n=A\lambda_1^n+B\lambda_2^n.
+	\]
+	\item 若有重根 \(\lambda\)，则
+	\[
+	a_n=(A+Bn)\lambda^n.
+	\]
+\end{enumerate}
+
+常数 \(A,B\) 由初始条件确定。
+
+\begin{question}{例题5}
+	求
+	\[
+	a_n=3a_{n-1}-2a_{n-2},\quad a_0=1,\ a_1=2
+	\]
+	的通项。
+	
+	\begin{solution}
+	特征方程为
+	\[
+	\lambda^2-3\lambda+2=0,
+	\]
+	根为 \(\lambda_1=1,\lambda_2=2\)。所以
+	\[
+	a_n=A+B2^n.
+	\]
+	由 \(a_0=1\) 得 \(A+B=1\)，由 \(a_1=2\) 得 \(A+2B=2\)，解得 \(B=1,A=0\)。因此
+	\[
+	a_n=2^n.
+	\]
+	\end{solution}
+\end{question}
+
+\subsection{生成函数简介}
+
+数列 \(\{a_n\}\) 的普通生成函数定义为
+\[
+G(x)=\sum_{n=0}^{\infty}a_nx^n.
+\]
+常用生成函数：
+\[
+\frac{1}{1-x}=1+x+x^2+\cdots,
+\]
+\[
+\frac{1}{(1-x)^2}=\sum_{n=0}^{\infty}(n+1)x^n,
+\]
+\[
+(1+x)^n=\sum_{k=0}^{n}\binom nkx^k.
+\]
+
+生成函数常用于求递推通项、组合数列和选取问题的计数。
+
+\subsection{本章重点定义与定理速查}
+
+\subsubsection{计数基本模型}
+
+\begin{enumerate}
+	\item \textbf{加法原理}：分类讨论且各类互不重叠时，总数为各类数量之和。
+	\item \textbf{乘法原理}：分步完成且每一步选择数确定时，总数为各步选择数之积。
+	\item \textbf{排列}：从 \(n\) 个不同元素中取 \(r\) 个排成一列：
+	\[
+	P(n,r)=\frac{n!}{(n-r)!}.
+	\]
+	\item \textbf{组合}：从 \(n\) 个不同元素中取 \(r\) 个不考虑顺序：
+	\[
+	\binom nr=\frac{n!}{r!(n-r)!}.
+	\]
+	\item \textbf{可重复排列}：从 \(n\) 个元素中每次可重复地取 \(r\) 次并考虑顺序，共 \(n^r\) 种。
+	\item \textbf{可重复组合}：从 \(n\) 类元素中取 \(r\) 个，允许重复且不考虑顺序，共
+	\[
+	\binom{n+r-1}{r}
+	\]
+	种。这等价于非负整数方程
+	\[
+	x_1+x_2+\cdots+x_n=r
+	\]
+	的解数。
+	\item \textbf{正整数解计数}：方程
+	\[
+	x_1+x_2+\cdots+x_n=r,\qquad x_i\ge1
+	\]
+	的解数为
+	\[
+	\binom{r-1}{n-1}.
+	\]
+\end{enumerate}
+
+\subsubsection{二项式与组合恒等式}
+
+\begin{enumerate}
+	\item \textbf{二项式定理}：
+	\[
+	(x+y)^n=\sum_{k=0}^n\binom nkx^{n-k}y^k.
+	\]
+	\item \textbf{对称公式}：
+	\[
+	\binom nr=\binom n{n-r}.
+	\]
+	\item \textbf{Pascal 公式}：
+	\[
+	\binom nr=\binom{n-1}{r}+\binom{n-1}{r-1}.
+	\]
+	\item \textbf{Vandermonde 恒等式}：
+	\[
+	\sum_{k=0}^r\binom mk\binom n{r-k}=\binom{m+n}{r}.
+	\]
+	\item \textbf{二项式系数和}：
+	\[
+	\sum_{k=0}^n\binom nk=2^n,\qquad
+	\sum_{k=0}^n(-1)^k\binom nk=0.
+	\]
+	\item \textbf{奇偶项和}：
+	\[
+	\sum_{\substack{0\le k\le n\\k\text{ 为偶数}}}\binom nk
+	=
+	\sum_{\substack{0\le k\le n\\k\text{ 为奇数}}}\binom nk
+	=2^{n-1}\quad(n\ge1).
+	\]
+\end{enumerate}
+
+\subsubsection{容斥、鸽巢与错排}
+
+\begin{enumerate}
+	\item \textbf{广义鸽巢原理}：把 \(N\) 个对象放入 \(k\) 个盒子，必有一个盒子至少含
+	\[
+	\left\lceil\frac Nk\right\rceil
+	\]
+	个对象。
+	\item \textbf{抽屉下界模型}：若要保证某盒至少有 \(r\) 个对象，最少需要
+	\[
+	k(r-1)+1
+	\]
+	个对象。
+	\item \textbf{容斥原理}：
+	\[
+	\left|\bigcup_{i=1}^nA_i\right|
+	=
+	\sum_i|A_i|-\sum_{i<j}|A_i\cap A_j|+\sum_{i<j<k}|A_i\cap A_j\cap A_k|-\cdots+(-1)^{n+1}|A_1\cap\cdots\cap A_n|.
+	\]
+	\item \textbf{错排数}：\(n\) 个元素的排列中没有任何元素在原位置的排列数为
+	\[
+	D_n=n!\sum_{k=0}^n\frac{(-1)^k}{k!}.
+	\]
+	递推形式为
+	\[
+	D_n=(n-1)(D_{n-1}+D_{n-2}),\qquad D_1=0,\ D_2=1.
+	\]
+\end{enumerate}
+
+\subsubsection{递推与生成函数}
+
+\begin{enumerate}
+	\item \textbf{递推关系}：用前面若干项定义后一项的关系。递推关系必须配合足够初始条件才能确定唯一数列。
+	\item \textbf{一阶线性递推}：
+	\[
+	a_n=ra_{n-1}+c.
+	\]
+	当 \(r\ne1\) 时，
+	\[
+	a_n=r^na_0+c\frac{r^n-1}{r-1};
+	\]
+	当 \(r=1\) 时，
+	\[
+	a_n=a_0+nc.
+	\]
+	\item \textbf{二阶常系数齐次递推}：
+	\[
+	a_n=c_1a_{n-1}+c_2a_{n-2}
+	\]
+	的特征方程是
+	\[
+	\lambda^2-c_1\lambda-c_2=0.
+	\]
+	不同根给出 \(A\lambda_1^n+B\lambda_2^n\)，重根给出 \((A+Bn)\lambda^n\)。
+	\item \textbf{普通生成函数}：
+	\[
+	G(x)=\sum_{n=0}^{\infty}a_nx^n.
+	\]
+	它把数列问题转化为形式幂级数的代数运算。
+	\item \textbf{常用生成函数}：
+	\[
+	\frac1{1-x}=\sum_{n=0}^{\infty}x^n,\qquad
+	\frac1{(1-x)^2}=\sum_{n=0}^{\infty}(n+1)x^n.
+	\]
+\end{enumerate}

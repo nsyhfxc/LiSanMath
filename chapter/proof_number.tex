@@ -1,0 +1,498 @@
+\section{证明方法、数学归纳法与数论基础}
+
+\subsection{证明的基本语言}
+
+\subsubsection{定义、命题、定理与证明}
+
+离散数学考试中，很多题目不是直接代入公式，而是要求说明“为什么成立”。因此要先区分以下概念：
+\begin{enumerate}
+	\item \textbf{定义}：人为约定的概念说明。证明题中不能证明定义本身，只能按定义展开使用。
+	\item \textbf{命题}：可以判断真假的陈述句。命题通常写成“若 \(P\)，则 \(Q\)”的形式。
+	\item \textbf{定理}：已经被证明为真的重要命题。定理可以作为后续证明的依据。
+	\item \textbf{引理}：为证明主要结论而先证明的辅助定理。
+	\item \textbf{推论}：由定理较直接推出的结论。
+	\item \textbf{证明}：从定义、公理、已知条件和已证定理出发，经过有限步有效推理得到结论的过程。
+\end{enumerate}
+
+常见命题形式：
+\[
+P\to Q,\qquad P\leftrightarrow Q,\qquad \forall x P(x),\qquad \exists x P(x).
+\]
+
+证明 \(P\leftrightarrow Q\) 时，通常要分别证明
+\[
+P\to Q,\qquad Q\to P.
+\]
+
+\subsubsection{直接证明法}
+
+\textbf{直接证明法}适合证明 \(P\to Q\)。基本思路是：假设 \(P\) 成立，利用定义和已知定理，一步步推出 \(Q\) 成立。
+
+\begin{question}{例题1}
+	证明：若整数 \(a,b\) 都是偶数，则 \(a+b\) 是偶数。
+	
+	\begin{solution}
+	由偶数定义，存在整数 \(m,n\)，使
+	\[
+	a=2m,\qquad b=2n.
+	\]
+	于是
+	\[
+	a+b=2m+2n=2(m+n).
+	\]
+	因为 \(m+n\in\mathbb Z\)，所以 \(a+b\) 是偶数。
+	\end{solution}
+\end{question}
+
+\subsubsection{逆否证明法}
+
+命题 \(P\to Q\) 与其逆否命题 \(\neg Q\to\neg P\) 等价。因此证明 \(P\to Q\) 可以改为证明 \(\neg Q\to\neg P\)。
+
+逆否证明常用于结论是“不等于”“不存在”“不是某性质”的题目。
+
+\begin{question}{例题2}
+	证明：若整数 \(n^2\) 是偶数，则 \(n\) 是偶数。
+	
+	\begin{solution}
+	证明逆否命题：若 \(n\) 不是偶数，则 \(n^2\) 不是偶数。
+	
+	若 \(n\) 不是偶数，则 \(n\) 是奇数，存在整数 \(k\)，使
+	\[
+	n=2k+1.
+	\]
+	于是
+	\[
+	n^2=(2k+1)^2=4k^2+4k+1=2(2k^2+2k)+1.
+	\]
+	所以 \(n^2\) 是奇数，不是偶数。逆否命题成立，原命题成立。
+	\end{solution}
+\end{question}
+
+\subsubsection{反证法}
+
+\textbf{反证法}证明命题 \(P\) 时，先假设 \(\neg P\) 成立，然后推出矛盾，从而说明 \(P\) 必成立。
+
+常见矛盾来源包括：
+\begin{enumerate}
+	\item 与已知条件矛盾。
+	\item 与定义矛盾。
+	\item 与已经证明的定理矛盾。
+	\item 推出 \(R\land\neg R\) 这类逻辑矛盾。
+\end{enumerate}
+
+\begin{question}{例题3}
+	证明：\(\sqrt2\) 是无理数。
+	
+	\begin{solution}
+	假设 \(\sqrt2\) 是有理数，则可写成最简分数
+	\[
+	\sqrt2=\frac ab,
+	\]
+	其中 \(a,b\in\mathbb Z\)，\(b\ne0\)，且 \(\gcd(a,b)=1\)。两边平方得
+	\[
+	a^2=2b^2.
+	\]
+	所以 \(a^2\) 是偶数，由例题2可知 \(a\) 是偶数。设 \(a=2k\)，则
+	\[
+	4k^2=2b^2,\qquad b^2=2k^2.
+	\]
+	所以 \(b^2\) 是偶数，进而 \(b\) 是偶数。这说明 \(a,b\) 同为偶数，与 \(\gcd(a,b)=1\) 矛盾。因此 \(\sqrt2\) 是无理数。
+	\end{solution}
+\end{question}
+
+\subsubsection{分情况证明、存在性证明与唯一性证明}
+
+\begin{enumerate}
+	\item \textbf{分情况证明}：把讨论对象划分为有限个互不遗漏的情况，分别证明每种情况都成立。
+	\item \textbf{构造性存在证明}：直接给出一个满足条件的对象。
+	\item \textbf{非构造性存在证明}：证明对象必然存在，但不一定给出具体对象。
+	\item \textbf{唯一性证明}：先证明存在，再假设有两个满足条件的对象，最后证明它们相等。
+	\item \textbf{反例}：要否定全称命题 \(\forall xP(x)\)，只需找到一个 \(x\) 使 \(P(x)\) 为假。
+\end{enumerate}
+
+\begin{question}{例题4}
+	证明：任意整数 \(n\)，\(n^2+n\) 是偶数。
+	
+	\begin{solution}
+	分 \(n\) 为偶数和奇数两种情况。
+	
+	若 \(n=2k\)，则
+	\[
+	n^2+n=4k^2+2k=2(2k^2+k).
+	\]
+	若 \(n=2k+1\)，则
+	\[
+	n^2+n=(2k+1)^2+(2k+1)=4k^2+6k+2=2(2k^2+3k+1).
+	\]
+	两种情况都说明 \(n^2+n\) 是偶数。
+	\end{solution}
+\end{question}
+
+\subsection{数学归纳法}
+
+\subsubsection{良序原理}
+
+\textbf{良序原理}：任意非空的正整数集合都有最小元素。
+
+良序原理、数学归纳法和强归纳法在逻辑上等价。考试中通常直接使用归纳法，但理解良序原理有助于解释为什么归纳法可靠。
+
+\subsubsection{第一数学归纳法}
+
+若命题 \(P(n)\) 对所有 \(n\ge n_0\) 的整数讨论，则第一数学归纳法包括两步：
+\begin{enumerate}
+	\item \textbf{归纳基础}：证明 \(P(n_0)\) 成立。
+	\item \textbf{归纳步骤}：假设 \(P(k)\) 成立，证明 \(P(k+1)\) 成立。
+\end{enumerate}
+完成两步后，可得
+\[
+\forall n\ge n_0,\quad P(n)\text{ 成立}.
+\]
+
+\begin{question}{例题5}
+	证明：
+	\[
+	1+2+\cdots+n=\frac{n(n+1)}2,\qquad n\ge1.
+	\]
+	
+	\begin{solution}
+	归纳基础：当 \(n=1\) 时，左边为 \(1\)，右边为 \(\frac{1\cdot2}{2}=1\)，成立。
+	
+	归纳假设：设当 \(n=k\) 时成立，即
+	\[
+	1+2+\cdots+k=\frac{k(k+1)}2.
+	\]
+	则当 \(n=k+1\) 时，
+	\[
+	1+2+\cdots+k+(k+1)
+	=\frac{k(k+1)}2+(k+1)
+	=\frac{(k+1)(k+2)}2.
+	\]
+	所以 \(P(k+1)\) 成立。由数学归纳法，结论对所有 \(n\ge1\) 成立。
+	\end{solution}
+\end{question}
+
+\subsubsection{强数学归纳法}
+
+强归纳法的归纳步骤是：假设
+\[
+P(n_0),P(n_0+1),\dots,P(k)
+\]
+都成立，再证明 \(P(k+1)\) 成立。
+
+强归纳法适合当前项依赖前面多个项的题目，例如递推、整除分解、图论结构分解。
+
+\begin{question}{例题6}
+	证明：每个大于 \(1\) 的整数都可以表示为若干个素数的乘积。
+	
+	\begin{solution}
+	对整数 \(n\ge2\) 用强归纳法。
+	
+	当 \(n=2\) 时，\(2\) 本身是素数，结论成立。
+	
+	假设 \(2,3,\dots,k\) 都能表示为若干素数的乘积。考虑 \(k+1\)。若 \(k+1\) 是素数，则结论成立。若 \(k+1\) 是合数，则存在整数 \(a,b\)，使
+	\[
+	k+1=ab,\qquad 2\le a\le k,\quad 2\le b\le k.
+	\]
+	由归纳假设，\(a,b\) 都能表示为若干素数的乘积，因此 \(k+1=ab\) 也能表示为若干素数的乘积。
+	\end{solution}
+\end{question}
+
+\subsubsection{结构归纳法}
+
+结构归纳法用于递归定义的对象，例如合式公式、递归定义的树、字符串、程序语法树。
+
+一般步骤：
+\begin{enumerate}
+	\item 证明所有基本对象满足性质。
+	\item 假设较小对象满足性质，证明按递归规则构造出的新对象也满足性质。
+	\item 说明对象只能由这些规则有限次生成。
+\end{enumerate}
+
+\subsection{整除、最大公约数与素数}
+
+\subsubsection{整除}
+
+设 \(a,b\in\mathbb Z\)，且 \(a\ne0\)。若存在整数 \(q\)，使
+\[
+b=aq,
+\]
+则称 \(a\) 整除 \(b\)，记作 \(a\mid b\)；否则记作 \(a\nmid b\)。
+
+整除的常用性质：
+\begin{enumerate}
+	\item 若 \(a\mid b\) 且 \(a\mid c\)，则 \(a\mid (mb+nc)\)，其中 \(m,n\in\mathbb Z\)。
+	\item 若 \(a\mid b\) 且 \(b\mid c\)，则 \(a\mid c\)。
+	\item 若 \(a\mid b\) 且 \(b\mid a\)，则 \(a=\pm b\)。
+	\item 若 \(a\mid b\)，则 \(|a|\le |b|\) 或 \(b=0\)。
+\end{enumerate}
+
+\subsubsection{带余除法}
+
+\textbf{带余除法定理}：任意整数 \(a\) 与正整数 \(b\)，存在唯一整数 \(q,r\)，使
+\[
+a=bq+r,\qquad 0\le r<b.
+\]
+其中 \(q\) 称为商，\(r\) 称为余数。
+
+\subsubsection{最大公约数与最小公倍数}
+
+\begin{enumerate}
+	\item \textbf{公约数}：若 \(d\mid a\) 且 \(d\mid b\)，则 \(d\) 是 \(a,b\) 的公约数。
+	\item \textbf{最大公约数}：\(a,b\) 的正公约数中最大的一个，记作 \(\gcd(a,b)\)。
+	\item \textbf{互素}：若 \(\gcd(a,b)=1\)，则称 \(a,b\) 互素。
+	\item \textbf{最小公倍数}：\(a,b\) 的正公倍数中最小的一个，记作 \(\operatorname{lcm}(a,b)\)。
+\end{enumerate}
+
+若 \(a,b\) 均为正整数，则
+\[
+\gcd(a,b)\operatorname{lcm}(a,b)=ab.
+\]
+
+\subsubsection{欧几里得算法与裴蜀定理}
+
+\textbf{欧几里得算法}：
+\[
+\gcd(a,b)=\gcd(b,a\bmod b).
+\]
+不断使用带余除法，最后一个非零余数就是最大公约数。
+
+\textbf{裴蜀定理}：设 \(a,b\) 不全为 \(0\)，则存在整数 \(x,y\)，使
+\[
+ax+by=\gcd(a,b).
+\]
+特别地，
+\[
+\gcd(a,b)=1\Leftrightarrow \exists x,y\in\mathbb Z,\ ax+by=1.
+\]
+
+\begin{question}{例题7}
+	求 \(\gcd(252,198)\)，并表示成 \(252x+198y\) 的形式。
+	
+	\begin{solution}
+	欧几里得算法：
+	\[
+	252=198\cdot1+54,
+	\]
+	\[
+	198=54\cdot3+36,
+	\]
+	\[
+	54=36\cdot1+18,
+	\]
+	\[
+	36=18\cdot2+0.
+	\]
+	所以 \(\gcd(252,198)=18\)。
+	
+	反代：
+	\[
+	18=54-36=54-(198-54\cdot3)=4\cdot54-198.
+	\]
+	又
+	\[
+	54=252-198,
+	\]
+	所以
+	\[
+	18=4(252-198)-198=4\cdot252-5\cdot198.
+	\]
+	因此 \(x=4,y=-5\)。
+	\end{solution}
+\end{question}
+
+\subsubsection{素数与算术基本定理}
+
+\begin{enumerate}
+	\item \textbf{素数}：大于 \(1\) 且正因子只有 \(1\) 和自身的整数。
+	\item \textbf{合数}：大于 \(1\) 但不是素数的整数。
+	\item \textbf{欧几里得引理}：若 \(p\) 是素数且 \(p\mid ab\)，则 \(p\mid a\) 或 \(p\mid b\)。
+	\item \textbf{算术基本定理}：每个大于 \(1\) 的整数都能唯一分解为素数幂的乘积，唯一性不计因子顺序。
+\end{enumerate}
+
+\subsection{同余与模运算}
+
+\subsubsection{同余关系}
+
+设 \(m\) 是正整数。若
+\[
+m\mid(a-b),
+\]
+则称 \(a\) 与 \(b\) 模 \(m\) 同余，记作
+\[
+a\equiv b\pmod m.
+\]
+
+同余模 \(m\) 是 \(\mathbb Z\) 上的等价关系，满足自反性、对称性和传递性。
+
+\subsubsection{同余运算定理}
+
+若
+\[
+a\equiv b\pmod m,\qquad c\equiv d\pmod m,
+\]
+则
+\[
+a+c\equiv b+d\pmod m,
+\]
+\[
+a-c\equiv b-d\pmod m,
+\]
+\[
+ac\equiv bd\pmod m.
+\]
+
+若 \(f(x)\) 是整系数多项式，且 \(a\equiv b\pmod m\)，则
+\[
+f(a)\equiv f(b)\pmod m.
+\]
+
+\subsubsection{剩余类与模逆元}
+
+模 \(m\) 的剩余类为
+\[
+[a]=\{x\in\mathbb Z\mid x\equiv a\pmod m\}.
+\]
+任意整数都与 \(0,1,\dots,m-1\) 中唯一一个数模 \(m\) 同余。
+
+若存在整数 \(x\)，使
+\[
+ax\equiv1\pmod m,
+\]
+则称 \(x\) 是 \(a\) 模 \(m\) 的乘法逆元。
+
+\textbf{逆元存在定理}：
+\[
+a\text{ 模 }m\text{ 有乘法逆元}\Leftrightarrow \gcd(a,m)=1.
+\]
+
+\subsubsection{线性同余方程}
+
+线性同余方程
+\[
+ax\equiv b\pmod m
+\]
+有解当且仅当
+\[
+\gcd(a,m)\mid b.
+\]
+若 \(d=\gcd(a,m)\)，且 \(d\mid b\)，则模 \(m\) 下有 \(d\) 个互不同余的解。
+
+\begin{question}{例题8}
+	解同余方程
+	\[
+	3x\equiv 4\pmod 7.
+	\]
+	
+	\begin{solution}
+	因为 \(\gcd(3,7)=1\)，所以 \(3\) 模 \(7\) 有逆元。试算得
+	\[
+	3\cdot5=15\equiv1\pmod7.
+	\]
+	两边同乘 \(5\)，得
+	\[
+	x\equiv 5\cdot4=20\equiv6\pmod7.
+	\]
+	\end{solution}
+\end{question}
+
+\subsubsection{费马小定理、欧拉定理与中国剩余定理}
+
+\textbf{费马小定理}：若 \(p\) 是素数且 \(p\nmid a\)，则
+\[
+a^{p-1}\equiv1\pmod p.
+\]
+等价地，对任意整数 \(a\)，有
+\[
+a^p\equiv a\pmod p.
+\]
+
+\textbf{欧拉函数} \(\varphi(n)\)：\(1,2,\dots,n\) 中与 \(n\) 互素的正整数个数。
+
+\textbf{欧拉定理}：若 \(\gcd(a,n)=1\)，则
+\[
+a^{\varphi(n)}\equiv1\pmod n.
+\]
+
+\textbf{中国剩余定理}：若 \(m_1,m_2,\dots,m_k\) 两两互素，则同余方程组
+\[
+x\equiv a_i\pmod {m_i},\qquad i=1,2,\dots,k
+\]
+模 \(M=m_1m_2\cdots m_k\) 有唯一解。
+
+\begin{question}{例题9}
+	求满足
+	\[
+	x\equiv2\pmod3,\qquad x\equiv3\pmod5
+	\]
+	的最小正整数解。
+	
+	\begin{solution}
+	由第一个同余式，设
+	\[
+	x=3k+2.
+	\]
+	代入第二个同余式：
+	\[
+	3k+2\equiv3\pmod5,
+	\]
+	即
+	\[
+	3k\equiv1\pmod5.
+	\]
+	因为 \(3^{-1}\equiv2\pmod5\)，所以
+	\[
+	k\equiv2\pmod5.
+	\]
+	取 \(k=2\)，得
+	\[
+	x=3\cdot2+2=8.
+	\]
+	所以最小正整数解为 \(8\)。
+	\end{solution}
+\end{question}
+
+\subsection{算法复杂度基础}
+
+\subsubsection{渐近记号}
+
+设 \(f(n),g(n)\) 为非负函数。
+\begin{enumerate}
+	\item \textbf{大 \(O\) 记号}：若存在常数 \(C>0,n_0\)，使当 \(n\ge n_0\) 时
+	\[
+	f(n)\le Cg(n),
+	\]
+	则称 \(f(n)=O(g(n))\)。它表示上界。
+	\item \textbf{大 \(\Omega\) 记号}：若存在常数 \(c>0,n_0\)，使当 \(n\ge n_0\) 时
+	\[
+	f(n)\ge cg(n),
+	\]
+	则称 \(f(n)=\Omega(g(n))\)。它表示下界。
+	\item \textbf{\(\Theta\) 记号}：若
+	\[
+	f(n)=O(g(n))\quad\text{且}\quad f(n)=\Omega(g(n)),
+	\]
+	则称 \(f(n)=\Theta(g(n))\)。它表示同阶。
+\end{enumerate}
+
+常见增长速度从慢到快为
+\[
+1,\quad \log n,\quad n,\quad n\log n,\quad n^2,\quad n^3,\quad 2^n,\quad n!.
+\]
+
+\subsection{本章重点定义与定理速查}
+
+\begin{enumerate}
+	\item \textbf{直接证明}：从前件、定义和已知结论出发推出后件，适合代数式、整除式、集合包含式证明。
+	\item \textbf{逆否证明}：证明 \(P\to Q\) 可改证 \(\neg Q\to\neg P\)，二者逻辑等价。
+	\item \textbf{反证法}：假设结论不成立，推出矛盾，适合无理性、唯一性、不存在性证明。
+	\item \textbf{数学归纳法}：先证基础情形，再证 \(P(k)\to P(k+1)\)，用于含自然数参数的命题。
+	\item \textbf{强归纳法}：归纳假设允许使用从基础到 \(k\) 的全部结论，适合递推、分解、构造题。
+	\item \textbf{整除定义}：\(a\mid b\Leftrightarrow \exists q\in\mathbb Z,\ b=aq\)。
+	\item \textbf{带余除法定理}：\(a=bq+r\)，其中 \(0\le r<b\)，且 \(q,r\) 唯一。
+	\item \textbf{欧几里得算法}：\(\gcd(a,b)=\gcd(b,a\bmod b)\)，用于快速求最大公约数。
+	\item \textbf{裴蜀定理}：\(\gcd(a,b)\) 可表示为 \(ax+by\)，互素等价于存在 \(ax+by=1\)。
+	\item \textbf{模逆元判定}：\(a\) 模 \(m\) 有逆元当且仅当 \(\gcd(a,m)=1\)。
+	\item \textbf{线性同余方程}：\(ax\equiv b\pmod m\) 有解当且仅当 \(\gcd(a,m)\mid b\)。
+	\item \textbf{中国剩余定理}：模数两两互素时，同余方程组模乘积有唯一解。
+	\item \textbf{渐近复杂度}：\(O\) 表上界，\(\Omega\) 表下界，\(\Theta\) 表同阶，计算机专业题常用来比较算法增长率。
+\end{enumerate}

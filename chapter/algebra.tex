@@ -1,0 +1,558 @@
+\section{代数系统}
+
+\subsection{代数结构}
+
+\subsubsection{基本概念}
+
+\begin{enumerate}
+	\item \textbf{代数系统}：由非空集合及其上的若干运算组成，记作
+	\[
+	\langle A,f_1,f_2,\dots,f_k\rangle.
+	\]
+	\item \textbf{\(n\) 元运算}：从 \(A^n\) 到 \(A\) 的映射称为 \(A\) 上的 \(n\) 元运算。二元运算常写作 \(a*b\)。
+	\item \textbf{封闭性}：若
+	\[
+	\forall a,b\in A,\quad a*b\in A,
+	\]
+	则称 \(*\) 在 \(A\) 上封闭。
+	\item \textbf{运算表}：有限代数系统可用 Cayley 表分析。封闭性对应表中结果全在集合内；交换律对应表关于主对角线对称。
+\end{enumerate}
+
+\subsubsection{二元运算的常见性质}
+
+设 \(*,\circ\) 是集合 \(A\) 上的二元运算。
+\begin{enumerate}
+	\item 交换律：
+	\[
+	a*b=b*a.
+	\]
+	\item 结合律：
+	\[
+	(a*b)*c=a*(b*c).
+	\]
+	\item 分配律：
+	\[
+	a*(b\circ c)=(a*b)\circ(a*c),
+	\]
+	\[
+	(b\circ c)*a=(b*a)\circ(c*a).
+	\]
+	\item 吸收律：
+	\[
+	a*(a\circ b)=a,\qquad a\circ(a*b)=a.
+	\]
+	\item 幂等律：
+	\[
+	a*a=a.
+	\]
+\end{enumerate}
+
+\subsubsection{特殊元素}
+
+\begin{enumerate}
+	\item \textbf{零元}：若存在 \(\theta\in A\)，使
+	\[
+	a*\theta=\theta*a=\theta,\qquad \forall a\in A,
+	\]
+	则 \(\theta\) 为零元。
+	\item \textbf{幺元}：若存在 \(e\in A\)，使
+	\[
+	a*e=e*a=a,\qquad \forall a\in A,
+	\]
+	则 \(e\) 为幺元或单位元。
+	\item \textbf{逆元}：若 \(e\) 是幺元，且
+	\[
+	a*b=b*a=e,
+	\]
+	则称 \(b\) 是 \(a\) 的逆元，记作 \(a^{-1}\)。
+	\item 左、右零元都存在时二者相等；左、右幺元都存在时二者相等。
+\end{enumerate}
+
+\subsection{半群、群、子群}
+
+\subsubsection{半群与独异点}
+
+\begin{enumerate}
+	\item \textbf{广群}：非空集合 \(G\) 上的二元运算 \(*\) 封闭，则 \(\langle G,*\rangle\) 称为广群。
+	\item \textbf{半群}：满足封闭性和结合律的代数系统称为半群。
+	\item \textbf{独异点}：含有幺元的半群称为独异点，也称含幺半群。
+\end{enumerate}
+
+\subsubsection{群}
+
+若 \(\langle G,*\rangle\) 是独异点，且每个元素均有逆元，则称其为群。若群的运算满足交换律，则称为阿贝尔群或交换群。
+
+群中的常用结论：
+\begin{enumerate}
+	\item 幺元唯一。
+	\item 每个元素的逆元唯一。
+	\item \((a^{-1})^{-1}=a\)。
+	\item \((a*b)^{-1}=b^{-1}*a^{-1}\)。
+	\item 消去律：
+	\[
+	a*b=a*c\Rightarrow b=c,\qquad b*a=c*a\Rightarrow b=c.
+	\]
+	\item 群中除幺元外没有其他幂等元。若 \(a*a=a\)，则 \(a=e\)。
+	\item 有限群的运算表中，每一行、每一列都是群元素的一个排列。
+\end{enumerate}
+
+\begin{question}{例题1}
+	判断 \(\langle\mathbb{Z},+\rangle\) 是否为群。
+	
+	\begin{solution}
+	整数加法封闭并满足结合律；幺元为 \(0\)；任意 \(a\in\mathbb{Z}\) 的逆元为 \(-a\)。因此 \(\langle\mathbb{Z},+\rangle\) 是群。又因为加法满足交换律，所以它是阿贝尔群。
+	\end{solution}
+\end{question}
+
+\subsubsection{子群}
+
+若 \(H\subseteq G\)，且 \(\langle H,*\rangle\) 本身也是群，则称 \(H\) 是 \(G\) 的子群，记作 \(H\le G\)。
+
+子群判定常用结论：
+\begin{enumerate}
+	\item 非空子集 \(H\subseteq G\) 是子群，当且仅当
+	\[
+	\forall a,b\in H,\quad a*b^{-1}\in H.
+	\]
+	\item 若 \(G\) 是有限群，非空子集 \(H\subseteq G\) 对运算封闭，则 \(H\le G\)。
+\end{enumerate}
+
+\subsection{阿贝尔群与循环群}
+
+\subsubsection{循环群}
+
+设 \(G\) 是群，若存在 \(a\in G\)，使得
+\[
+G=\langle a\rangle=\{a^n\mid n\in\mathbb{Z}\},
+\]
+则称 \(G\) 是循环群，\(a\) 称为生成元。
+
+\begin{enumerate}
+	\item 任意循环群都是阿贝尔群。
+	\item 阿贝尔群未必是循环群。
+	\item 元素 \(a\) 的阶是使 \(a^n=e\) 成立的最小正整数 \(n\)。若不存在这样的正整数，则称 \(a\) 为无限阶。
+\end{enumerate}
+
+\subsubsection{置换群}
+
+集合 \(S\) 到自身的双射称为 \(S\) 上的一个置换。所有置换在函数复合下构成群，称为置换群。集合 \(\{1,2,\dots,n\}\) 上的全体置换群记作 \(S_n\)，称为 \(n\) 次对称群。
+
+\subsection{陪集和拉格朗日定理}
+
+设 \(G\) 是群，\(H\le G\)，\(a\in G\)。
+
+\begin{enumerate}
+	\item 左陪集：
+	\[
+	aH=\{a*h\mid h\in H\}.
+	\]
+	\item 右陪集：
+	\[
+	Ha=\{h*a\mid h\in H\}.
+	\]
+	\item \(H\) 在 \(G\) 中不同左陪集的个数称为 \(H\) 在 \(G\) 中的指数，记作 \([G:H]\)。
+\end{enumerate}
+
+\textbf{拉格朗日定理}：若 \(G\) 是有限群，\(H\le G\)，则
+\[
+|G|=[G:H]\cdot |H|.
+\]
+因此 \(|H|\) 整除 \(|G|\)。
+
+重要推论：
+\begin{enumerate}
+	\item 有限群中任意元素的阶都整除群的阶。
+	\item 若 \(|G|=n\)，则对任意 \(a\in G\)，有 \(a^n=e\)。
+	\item 素数阶群一定是循环群，且任一非幺元都是生成元。
+\end{enumerate}
+
+\begin{question}{例题2}
+	设 \(G\) 是 \(12\) 阶有限群，\(H\le G\)，且 \(|H|=3\)。求 \([G:H]\)。
+	
+	\begin{solution}
+	由拉格朗日定理，
+	\[
+	[G:H]=\frac{|G|}{|H|}=\frac{12}{3}=4.
+	\]
+	\end{solution}
+\end{question}
+
+\subsection{同态和同构}
+
+\subsubsection{同态}
+
+设 \(\langle A,*\rangle\)、\(\langle B,\circ\rangle\) 是两个代数系统。映射 \(f:A\to B\) 若满足
+\[
+f(x*y)=f(x)\circ f(y),\qquad \forall x,y\in A,
+\]
+则称 \(f\) 为同态映射。
+
+\begin{enumerate}
+	\item 同态若为单射，称为单同态。
+	\item 同态若为满射，称为满同态。
+	\item 同态若为双射，称为同构。
+	\item 若 \(A\) 与 \(B\) 同构，记作 \(A\cong B\)。同构表示两个代数系统结构相同。
+\end{enumerate}
+
+群同态 \(f:G\to G'\) 的核为
+\[
+\operatorname{Ker}f=\{x\in G\mid f(x)=e'\},
+\]
+其中 \(e'\) 是 \(G'\) 的幺元。
+
+\subsection{环与域}
+
+\subsubsection{环}
+
+代数系统 \(\langle A,+,\cdot\rangle\) 若满足：
+\begin{enumerate}
+	\item \(\langle A,+\rangle\) 是阿贝尔群；
+	\item \(\langle A,\cdot\rangle\) 是半群；
+	\item 乘法对加法满足左右分配律：
+	\[
+	a\cdot(b+c)=a\cdot b+a\cdot c,
+	\]
+	\[
+	(b+c)\cdot a=b\cdot a+c\cdot a,
+	\]
+\end{enumerate}
+则称 \(\langle A,+,\cdot\rangle\) 为环。
+
+\subsubsection{整环与域}
+
+\begin{enumerate}
+	\item \textbf{整环}：乘法可交换、有乘法幺元且无零因子的环称为整环。
+	\item \textbf{域}：若 \(\langle A,+\rangle\) 是阿贝尔群，\(A-\{0\}\) 在乘法下是阿贝尔群，且乘法对加法满足分配律，则称为域。
+	\item 域一定是整环。
+	\item 有限整环一定是域。
+\end{enumerate}
+
+\begin{center}
+	\begin{tabular}{cc}
+		\toprule
+		结构 & 典型例子\\
+		\midrule
+		环 & \(\langle\mathbb{Z},+,\cdot\rangle\)\\
+		整环 & \(\langle\mathbb{Z},+,\cdot\rangle\)\\
+		域 & \(\langle\mathbb{Q},+,\cdot\rangle,\ \langle\mathbb{R},+,\cdot\rangle\)\\
+		非交换环 & \(n\) 阶矩阵环\\
+		\bottomrule
+	\end{tabular}
+\end{center}
+
+\section{格和布尔代数}
+
+\subsection{格的基本概念}
+
+\subsubsection{格}
+
+设 \(\langle A,\le\rangle\) 是偏序集。若任意 \(a,b\in A\) 都有最小上界和最大下界，则称 \(\langle A,\le\rangle\) 为格。
+
+\begin{enumerate}
+	\item \(a\vee b\)：\(a,b\) 的最小上界，称为并。
+	\item \(a\wedge b\)：\(a,b\) 的最大下界，称为交。
+	\item 全序集一定是格，但偏序集未必都是格。
+\end{enumerate}
+
+\subsubsection{格的代数性质}
+
+若 \(\langle A,\le\rangle\) 是格，则 \(\langle A,\vee,\wedge\rangle\) 满足：
+\begin{enumerate}
+	\item 交换律：
+	\[
+	a\vee b=b\vee a,\qquad a\wedge b=b\wedge a.
+	\]
+	\item 结合律：
+	\[
+	a\vee(b\vee c)=(a\vee b)\vee c,
+	\]
+	\[
+	a\wedge(b\wedge c)=(a\wedge b)\wedge c.
+	\]
+	\item 吸收律：
+	\[
+	a\vee(a\wedge b)=a,\qquad a\wedge(a\vee b)=a.
+	\]
+	\item 幂等律：
+	\[
+	a\vee a=a,\qquad a\wedge a=a.
+	\]
+\end{enumerate}
+
+反过来，若 \(\langle A,\vee,\wedge\rangle\) 满足交换律、结合律和吸收律，则可定义偏序：
+\[
+a\le b\Leftrightarrow a\wedge b=a,
+\]
+也等价于
+\[
+a\le b\Leftrightarrow a\vee b=b.
+\]
+
+\subsubsection{格的对偶原则}
+
+把 \(\vee\) 与 \(\wedge\) 互换，把 \(0\) 与 \(1\) 互换，把 \(\le\) 与 \(\ge\) 互换，所得命题称为原命题的对偶命题。若原命题在所有格中成立，则其对偶命题也成立。
+
+\subsection{特殊的格}
+
+\subsubsection{分配格}
+
+若格满足
+\[
+a\vee(b\wedge c)=(a\vee b)\wedge(a\vee c),
+\]
+\[
+a\wedge(b\vee c)=(a\wedge b)\vee(a\wedge c),
+\]
+则称为分配格。链一定是分配格。
+
+任意格中总有分配不等式：
+\[
+a\vee(b\wedge c)\le (a\vee b)\wedge(a\vee c),
+\]
+\[
+(a\wedge b)\vee(a\wedge c)\le a\wedge(b\vee c).
+\]
+
+\subsubsection{有界格、有补格、布尔格}
+
+\begin{enumerate}
+	\item \textbf{有界格}：存在全下界 \(0\) 和全上界 \(1\)，使
+	\[
+	0\le a\le1,\qquad \forall a\in A.
+	\]
+	\item \textbf{补元}：在有界格中，若
+	\[
+	a\vee b=1,\qquad a\wedge b=0,
+	\]
+	则称 \(b\) 是 \(a\) 的补元。
+	\item \textbf{有补格}：每个元素都有补元的有界格。
+	\item \textbf{布尔格}：有补分配格。
+\end{enumerate}
+
+\begin{question}{例题3}
+	证明 \(\langle\mathcal{P}(S),\subseteq\rangle\) 是布尔格。
+	
+	\begin{solution}
+	对任意 \(A,B\subseteq S\)，最小上界是 \(A\cup B\)，最大下界是 \(A\cap B\)，因此它是格。全下界为 \(\varnothing\)，全上界为 \(S\)。集合并交满足分配律。任意 \(A\subseteq S\) 的补元为 \(S-A\)，因为
+	\[
+	A\cup(S-A)=S,\qquad A\cap(S-A)=\varnothing.
+	\]
+	所以 \(\langle\mathcal{P}(S),\subseteq\rangle\) 是布尔格。
+	\end{solution}
+\end{question}
+
+\subsection{布尔代数}
+
+\subsubsection{布尔代数定义}
+
+由布尔格诱导的代数系统
+\[
+\langle A,\vee,\wedge,{}'\!,0,1\rangle
+\]
+称为布尔代数，其中 \(a'\) 表示 \(a\) 的补元。
+
+\subsubsection{布尔代数常用公式}
+
+\begin{center}
+	\begin{tabular}{cl}
+		\toprule
+		名称 & 公式\\
+		\midrule
+		同一律 & \(a\vee0=a,\quad a\wedge1=a\)\\
+		零律 & \(a\vee1=1,\quad a\wedge0=0\)\\
+		补元律 & \(a\vee a'=1,\quad a\wedge a'=0\)\\
+		双补律 & \((a')'=a\)\\
+		德摩根律 & \((a\vee b)'=a'\wedge b'\)\\
+		          & \((a\wedge b)'=a'\vee b'\)\\
+		\bottomrule
+	\end{tabular}
+\end{center}
+
+\subsubsection{有限布尔代数与原子}
+
+\begin{enumerate}
+	\item 若 \(a\ne0\)，且不存在 \(x\) 满足 \(0<x<a\)，则称 \(a\) 为原子。
+	\item 在有限布尔代数中，每个非零元素都可表示为若干原子的并。
+	\item 若有限布尔代数有 \(n\) 个原子，则它共有 \(2^n\) 个元素。
+\end{enumerate}
+
+\begin{question}{例题4}
+	设 \(S=\{1,2,3\}\)。布尔代数 \(\mathcal{P}(S)\) 有几个原子？共有几个元素？
+	
+	\begin{solution}
+	原子为单元素子集
+	\[
+	\{1\},\{2\},\{3\}.
+	\]
+	所以原子数为 \(3\)，元素数为 \(2^3=8\)。
+	\end{solution}
+\end{question}
+
+\section{代数系统考试补充}
+
+\subsection{运算表判定技巧}
+
+有限代数系统的运算表是考试高频题型。设运算表行表示左操作数，列表示右操作数。
+\begin{enumerate}
+	\item \textbf{封闭性}：表中每个结果都必须属于给定集合。
+	\item \textbf{交换律}：运算表关于主对角线对称。
+	\item \textbf{幺元}：若某一行与表头完全相同，且同名列也与表头完全相同，则该元素为幺元。
+	\item \textbf{零元}：若某一行全为该元素，且同名列也全为该元素，则该元素为零元。
+	\item \textbf{逆元}：在有幺元 \(e\) 的前提下，若 \(a*b=b*a=e\)，则 \(a,b\) 互为逆元。
+	\item \textbf{群表}：有限群的每一行、每一列都必须是集合元素的一个排列。
+\end{enumerate}
+
+\begin{question}{例题5}
+	设 \(A=\{a,b,c\}\)，运算 \(*\) 的表为
+	\[
+	\begin{array}{cccc}
+	\toprule
+	*&a&b&c\\
+	\midrule
+	a&a&b&c\\
+	b&b&a&c\\
+	c&c&c&c\\
+	\bottomrule
+	\end{array}
+	\]
+	求幺元和零元。
+	
+	\begin{solution}
+	第 \(a\) 行为 \(a,b,c\)，第 \(a\) 列也为 \(a,b,c\)，所以 \(a\) 是幺元。第 \(c\) 行全为 \(c\)，第 \(c\) 列也全为 \(c\)，所以 \(c\) 是零元。
+	\end{solution}
+\end{question}
+
+\subsection{模 n 运算}
+
+整数模 \(n\) 同余：
+\[
+a\equiv b\pmod n\Leftrightarrow n\mid(a-b).
+\]
+同余模 \(n\) 是 \(\mathbb Z\) 上的等价关系，其等价类为
+\[
+[0],[1],\dots,[n-1].
+\]
+
+集合 \(\mathbb Z_n=\{[0],[1],\dots,[n-1]\}\) 上可定义模 \(n\) 加法和乘法：
+\[
+[a]+[b]=[a+b],\qquad [a]\cdot[b]=[ab].
+\]
+
+\begin{enumerate}
+	\item \(\langle\mathbb Z_n,+\rangle\) 是 \(n\) 阶循环群，生成元为 \([1]\)。
+	\item \(\langle\mathbb Z_n,+,\cdot\rangle\) 是有幺交换环。
+	\item 当且仅当 \(p\) 是素数时，\(\mathbb Z_p\) 是域。
+\end{enumerate}
+
+\subsection{布尔函数与析取范式}
+
+布尔代数在计算机专业中常用于开关电路与逻辑门。
+\begin{enumerate}
+	\item 布尔函数是从 \(\{0,1\}^n\) 到 \(\{0,1\}\) 的函数。
+	\item \(n\) 元布尔函数共有
+	\[
+	2^{2^n}
+	\]
+	个。
+	\item 每个布尔函数都可以表示为主析取范式或主合取范式。
+\end{enumerate}
+
+若布尔函数在小项 \(m_{i_1},m_{i_2},\dots,m_{i_k}\) 上取值为 \(1\)，则可写作
+\[
+f=\sum m(i_1,i_2,\dots,i_k).
+\]
+若在大项 \(M_{j_1},M_{j_2},\dots,M_{j_s}\) 上取值为 \(0\)，则可写作
+\[
+f=\prod M(j_1,j_2,\dots,j_s).
+\]
+
+\subsection{本章重点定义与定理速查}
+
+\subsubsection{代数系统与运算}
+
+\begin{enumerate}
+	\item \textbf{代数系统}：非空集合连同其上的若干运算组成的系统，常记为 \(\langle A,*\rangle\) 或 \(\langle A,+,\cdot\rangle\)。
+	\item \textbf{封闭性}：对任意 \(a,b\in A\)，都有 \(a*b\in A\)。
+	\item \textbf{结合律}：
+	\[
+	(a*b)*c=a*(b*c).
+	\]
+	\item \textbf{交换律}：
+	\[
+	a*b=b*a.
+	\]
+	\item \textbf{幺元}：若 \(a*e=e*a=a\)，则 \(e\) 是幺元。若存在，幺元唯一。
+	\item \textbf{零元}：若 \(a*\theta=\theta*a=\theta\)，则 \(\theta\) 是零元。若存在，零元唯一。
+	\item \textbf{逆元}：在有幺元 \(e\) 的系统中，若 \(a*b=b*a=e\)，则 \(b\) 是 \(a\) 的逆元。群中每个元素逆元唯一。
+\end{enumerate}
+
+\subsubsection{群论核心定义与定理}
+
+\begin{enumerate}
+	\item \textbf{半群}：封闭且满足结合律的代数系统。
+	\item \textbf{独异点}：含幺元的半群。
+	\item \textbf{群}：含幺元且每个元素都有逆元的半群。
+	\item \textbf{阿贝尔群}：运算满足交换律的群。
+	\item \textbf{子群判定定理}：非空子集 \(H\subseteq G\) 是子群，当且仅当
+	\[
+	\forall a,b\in H,\quad ab^{-1}\in H.
+	\]
+	若 \(G\) 有限，非空子集 \(H\) 对运算封闭即可推出 \(H\le G\)。
+	\item \textbf{循环群}：若存在 \(a\in G\)，使
+	\[
+	G=\langle a\rangle=\{a^n\mid n\in\mathbb Z\},
+	\]
+	则 \(G\) 是循环群。循环群一定是阿贝尔群。
+	\item \textbf{元素的阶}：使 \(a^n=e\) 成立的最小正整数 \(n\)。若不存在，则为无限阶。
+	\item \textbf{拉格朗日定理}：若 \(G\) 是有限群，\(H\le G\)，则
+	\[
+	|G|=[G:H]|H|.
+	\]
+	因此子群阶整除群阶。
+	\item \textbf{拉格朗日推论}：有限群中任意元素的阶整除群的阶；若 \(|G|=n\)，则 \(a^n=e\)。
+	\item \textbf{素数阶群定理}：素数阶群一定是循环群，且任意非幺元都是生成元。
+\end{enumerate}
+
+\subsubsection{同态、环与域}
+
+\begin{enumerate}
+	\item \textbf{同态}：映射 \(f:A\to B\) 保持运算，即
+	\[
+	f(x*y)=f(x)\circ f(y).
+	\]
+	\item \textbf{同构}：双射同态。两个代数系统同构表示运算结构完全相同。
+	\item \textbf{群同态核}：
+	\[
+	\operatorname{Ker}f=\{x\in G\mid f(x)=e'\}.
+	\]
+	核是 \(G\) 的子群。
+	\item \textbf{环}：\(\langle R,+\rangle\) 是阿贝尔群，\(\langle R,\cdot\rangle\) 是半群，且乘法对加法满足左右分配律。
+	\item \textbf{整环}：有乘法幺元、乘法交换且无零因子的环。
+	\item \textbf{域}：非零元素对乘法构成阿贝尔群的交换环。域一定是整环，有限整环一定是域。
+	\item \textbf{模 \(n\) 结论}：\(\mathbb Z_n\) 在模加法下是循环群；\(\mathbb Z_n\) 是有幺交换环；\(\mathbb Z_p\) 是域当且仅当 \(p\) 是素数。
+\end{enumerate}
+
+\subsubsection{格与布尔代数}
+
+\begin{enumerate}
+	\item \textbf{格}：偏序集中任意两个元素都有最小上界和最大下界。
+	\item \textbf{并与交}：\(a\vee b\) 表示最小上界，\(a\wedge b\) 表示最大下界。
+	\item \textbf{格的代数刻画}：满足交换律、结合律和吸收律的 \(\langle A,\vee,\wedge\rangle\) 可诱导出格序。
+	\item \textbf{分配格}：满足
+	\[
+	a\vee(b\wedge c)=(a\vee b)\wedge(a\vee c),
+	\]
+	\[
+	a\wedge(b\vee c)=(a\wedge b)\vee(a\wedge c).
+	\]
+	\item \textbf{有界格}：有全下界 \(0\) 和全上界 \(1\) 的格。
+	\item \textbf{补元}：若 \(a\vee b=1\) 且 \(a\wedge b=0\)，则 \(b\) 是 \(a\) 的补元。
+	\item \textbf{布尔格}：有补分配格。
+	\item \textbf{布尔代数}：由布尔格诱导的代数系统 \(\langle A,\vee,\wedge,{}'\!,0,1\rangle\)。
+	\item \textbf{有限布尔代数原子定理}：若有限布尔代数有 \(n\) 个原子，则共有 \(2^n\) 个元素。
+	\item \textbf{布尔函数计数}：\(n\) 元布尔函数共有
+	\[
+	2^{2^n}
+	\]
+	个。
+\end{enumerate}
